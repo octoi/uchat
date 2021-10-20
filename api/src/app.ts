@@ -1,20 +1,28 @@
 import express from 'express';
 import cors from 'cors';
-import { graphqlHTTP } from 'express-graphql';
 import { log } from './utils/log';
 import { schema } from './graphql';
+import { ApolloServer } from 'apollo-server-express';
 
-const app = express();
+const main = async () => {
+  const app = express();
 
-// apply middlewares
-app.use(cors());
-app.use(express.json());
-app.use('/api', graphqlHTTP({ graphiql: true, schema })); // graphql hookup
+  // apply middlewares
+  app.use(cors());
+  app.use(express.json());
 
-// start server
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  log.success(`🚀 SERVER STARTED ON PORT ${port}`);
-  log.info(`SERVER : http://localhost:${port}`);
-  log.info(`GRAPHQL: http://localhost:${port}/api`);
-});
+  const server = new ApolloServer({ schema });
+  await server.start();
+
+  server.applyMiddleware({ app, path: '/api' });
+
+  // start server
+  const port = process.env.PORT || 5000;
+  app.listen(port, () => {
+    log.success(`🚀 SERVER STARTED ON PORT ${port}`);
+    log.info(`SERVER : http://localhost:${port}`);
+    log.info(`GRAPHQL: http://localhost:${port}${server.graphqlPath}`);
+  });
+};
+
+main().catch((err) => log.error(err));
