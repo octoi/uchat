@@ -1,5 +1,8 @@
 import { GraphQLString } from 'graphql';
-import { registerController } from '../../controllers/user.controller';
+import {
+  loginController,
+  registerController,
+} from '../../controllers/user.controller';
 import { loginArgs, registerArgs } from '../../utils/types';
 import { UserType } from '../typeDefs/user.typeDef';
 import { validateRegisterArgs } from '../validators/user.validator';
@@ -12,9 +15,7 @@ export const LOGIN = {
   },
   async resolve(parent: any, requestArgs: any) {
     const args: loginArgs = requestArgs;
-
-    console.log(args.email);
-    console.log(args.password);
+    return loginController(args);
   },
 };
 
