@@ -1,18 +1,15 @@
-// All database stuffs for users
-
+import { UserInputError } from 'apollo-server-errors';
+import { registerUser } from '../models/user.model';
+import { generateToken } from '../utils/jwt';
 import { registerArgs } from '../utils/types';
-import { prismaClient } from './prisma';
 
-export const registerUser = (data: registerArgs) => {
-  return new Promise((resolve, reject) => {
-    prismaClient.user
-      .create({ data })
-      .then(resolve)
-      .catch((err) => {
-        if (err.code === 'P2002') {
-          reject(`${data.email} already exist`);
-        }
-        reject('failed to register user');
-      });
+export const registerController = async (args: registerArgs) => {
+  const user: any = await registerUser(args).catch((err) => {
+    throw new UserInputError(err);
   });
+
+  return {
+    ...user,
+    token: generateToken(user),
+  };
 };

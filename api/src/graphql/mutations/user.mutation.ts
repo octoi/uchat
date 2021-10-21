@@ -1,6 +1,5 @@
-import { UserInputError } from 'apollo-server-errors';
 import { GraphQLString } from 'graphql';
-import { registerUser } from '../../controllers/user.controller';
+import { registerController } from '../../controllers/user.controller';
 import { loginArgs, registerArgs } from '../../utils/types';
 import { UserType } from '../typeDefs/user.typeDef';
 import { validateRegisterArgs } from '../validators/user.validator';
@@ -29,11 +28,6 @@ export const REGISTER = {
   },
   async resolve(parent: any, requestArgs: any) {
     const args: registerArgs = validateRegisterArgs(requestArgs);
-
-    const user = await registerUser(args).catch((err) => {
-      throw new UserInputError(err);
-    });
-
-    return user;
+    return registerController(args);
   },
 };
