@@ -1,6 +1,5 @@
 // All database stuffs for users
 
-import { log } from '../utils/log';
 import { registerArgs } from '../utils/types';
 import { prismaClient } from './prisma';
 
@@ -9,8 +8,11 @@ export const registerUser = (data: registerArgs) => {
     prismaClient.user
       .create({ data })
       .then(resolve)
-      .catch(() => {
-        reject(`User exits with email ${data.email}`);
+      .catch((err) => {
+        if (err.code === 'P2002') {
+          reject(`${data.email} already exist`);
+        }
+        reject('failed to register user');
       });
   });
 };
