@@ -11,7 +11,7 @@ const main = async () => {
   app.use(cors());
   app.use(express.json());
 
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({ schema, context: ({ req }) => ({ req }) });
   await server.start();
 
   server.applyMiddleware({ app, path: '/api' });
