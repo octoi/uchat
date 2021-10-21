@@ -1,11 +1,14 @@
 import { GraphQLString } from 'graphql';
+import { loginArgs, registerArgs } from '../../utils/types';
+import { UserType } from '../typeDefs/user.typeDef';
 import {
   loginController,
   registerController,
 } from '../../controllers/user.controller';
-import { loginArgs, registerArgs } from '../../utils/types';
-import { UserType } from '../typeDefs/user.typeDef';
-import { validateRegisterArgs } from '../validators/user.validator';
+import {
+  validateLoginArgs,
+  validateRegisterArgs,
+} from '../validators/user.validator';
 
 export const LOGIN = {
   type: UserType,
@@ -14,7 +17,7 @@ export const LOGIN = {
     password: { type: GraphQLString },
   },
   async resolve(parent: any, requestArgs: any) {
-    const args: loginArgs = requestArgs;
+    const args: loginArgs = validateLoginArgs(requestArgs);
     return loginController(args);
   },
 };

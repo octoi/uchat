@@ -9,3 +9,9 @@ export interface registerArgs {
   profile: string;
   password: string;
 }
+
+export interface createRoomArgs {
+  title: string;
+  description: string;
+  isPrivate: boolean;
+}
