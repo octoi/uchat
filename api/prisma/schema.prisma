@@ -21,9 +21,10 @@ model User {
 }
 
 model Room {
-  id          Int    @id @unique @default(autoincrement())
-  roomId      String @unique @db.Uuid
+  id          Int     @id @unique @default(autoincrement())
+  roomId      String  @unique @db.Uuid
   title       String
   description String
+  isPrivate   Boolean
   creator     User?
 }
