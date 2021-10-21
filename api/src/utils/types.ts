@@ -9,11 +9,3 @@ export interface registerArgs {
   profile: string;
   password: string;
 }
-
-export interface userResponse {
-  id: number;
-  token: string;
-  name: string;
-  email: string;
-  profile: string;
-}
