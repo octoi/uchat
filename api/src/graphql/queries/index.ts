@@ -1,13 +1,9 @@
-import { GraphQLBoolean, GraphQLObjectType } from 'graphql';
+import { GraphQLObjectType } from 'graphql';
+import { GET_ROOMS } from './room.query';
 
 export const Queries = new GraphQLObjectType({
   name: 'Queries',
   fields: () => ({
-    sample: {
-      type: GraphQLBoolean,
-      resolve() {
-        return true;
-      },
-    },
+    getRooms: GET_ROOMS,
   }),
 });
