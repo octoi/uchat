@@ -53,6 +53,9 @@ export const UPDATE = {
     const user: updateArgs = {
       ...loggedInUser,
       ...requestArgs,
+      password: requestArgs.isNewPassword
+        ? requestArgs.password
+        : loggedInUser.password,
       ogEmail: loggedInUser.email,
     };
     return updateController(user);
