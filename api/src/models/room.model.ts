@@ -13,9 +13,23 @@ export const createRoom = (data: createRoomArgs, userId: number) => {
         },
       })
       .then(resolve)
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         reject('Failed to create room');
+      });
+  });
+};
+
+export const getRooms = () => {
+  return new Promise((resolve, reject) => {
+    prismaClient.room
+      .findMany({
+        include: {
+          creator: true,
+        },
+      })
+      .then(resolve)
+      .catch(() => {
+        reject('Failed to get rooms');
       });
   });
 };

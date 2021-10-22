@@ -4,6 +4,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
+import { UserType } from './user.typeDef';
 
 export const RoomType = new GraphQLObjectType({
   name: 'Room',
@@ -13,6 +14,16 @@ export const RoomType = new GraphQLObjectType({
     title: { type: GraphQLString },
     description: { type: GraphQLString },
     isPrivate: { type: GraphQLBoolean },
-    creator: { type: GraphQLID },
+    creator: { type: UserType },
+  }),
+});
+
+export const RoomUserType = new GraphQLObjectType({
+  name: 'RoomUser',
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    profile: { type: GraphQLString },
   }),
 });
