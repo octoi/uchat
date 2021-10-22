@@ -20,10 +20,11 @@ model User {
 }
 
 model Room {
-  id          Int    @id @unique @default(autoincrement())
-  roomId      String @unique @db.Uuid
+  id          Int     @id @unique @default(autoincrement())
+  roomId      String  @unique
   title       String
   description String
-  creator     User   @relation(fields: [creatorId], references: [id])
+  isPrivate   Boolean
+  creator     User    @relation(fields: [creatorId], references: [id])
   creatorId   Int
 }
