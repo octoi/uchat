@@ -1,6 +1,6 @@
 // All database stuffs for users
 
-import { loginArgs, registerArgs } from '../utils/types';
+import { loginArgs, registerArgs, updateArgs } from '../utils/types';
 import { prismaClient } from './prisma';
 import bcrypt from 'bcrypt';
 
@@ -35,6 +35,33 @@ export const loginUser = (data: loginArgs) => {
       if (!res) return reject('Invalid password');
       resolve(user);
     });
+  });
+};
+
+export const updateUser = (data: updateArgs) => {
+  return new Promise(async (resolve, reject) => {
+    const user: any = await findUser(data.ogEmail).catch(reject);
+    if (!user) return;
+
+    if (data.isNewPassword) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    prismaClient.user
+      .update({
+        where: { id: data.id },
+        data: {
+          name: data.name,
+          email: data.email,
+          profile: data.profile,
+          password: data.password,
+        },
+      })
+      .then(resolve)
+      .catch((err) => {
+        console.log(err);
+        reject('Failed to update user');
+      });
   });
 };
 
