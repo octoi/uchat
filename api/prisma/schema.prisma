@@ -11,20 +11,19 @@ datasource db {
 }
 
 model User {
-  id           Int    @id @unique @default(autoincrement())
-  email        String @unique
-  name         String
-  profile      String
-  password     String
-  roomRelation Room?  @relation(fields: [room], references: [id])
-  room         Int?   @unique
+  id       Int    @id @unique @default(autoincrement())
+  email    String @unique
+  name     String
+  profile  String
+  password String
+  rooms    Room[]
 }
 
 model Room {
-  id          Int     @id @unique @default(autoincrement())
-  roomId      String  @unique @db.Uuid
+  id          Int    @id @unique @default(autoincrement())
+  roomId      String @unique @db.Uuid
   title       String
   description String
-  isPrivate   Boolean
-  creator     User?
+  creator     User   @relation(fields: [creatorId], references: [id])
+  creatorId   Int
 }
