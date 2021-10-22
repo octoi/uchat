@@ -1,5 +1,6 @@
 import { ExpressContext } from 'apollo-server-express';
 import { GraphQLBoolean, GraphQLString } from 'graphql';
+import { createRoomController } from '../../controllers/room.controller';
 import { getUserFromContext } from '../../utils/jwt';
 import { createRoomArgs } from '../../utils/types';
 import { RoomType } from '../typeDefs/room.typeDef';
@@ -14,8 +15,7 @@ export const CREATE_ROOM = {
   },
   async resolve(parent: any, requestArgs: any, context: ExpressContext) {
     const args: createRoomArgs = validateCreateRoomArgs(requestArgs);
-    const loggedInUser = getUserFromContext(context);
-    console.log(loggedInUser);
-    console.log(args);
+    const loggedInUser: any = getUserFromContext(context);
+    return createRoomController(args, loggedInUser?.id);
   },
 };
