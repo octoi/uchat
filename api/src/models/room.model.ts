@@ -23,6 +23,9 @@ export const getRooms = () => {
   return new Promise((resolve, reject) => {
     prismaClient.room
       .findMany({
+        where: {
+          isPrivate: false, // this actually works
+        },
         include: {
           creator: true,
         },
