@@ -1,5 +1,5 @@
 import { UserInputError, HttpQueryError } from 'apollo-server-core';
-import { createRoom, getRooms } from '../models/room.model';
+import { createRoom, getRoom, getRooms } from '../models/room.model';
 import { createRoomArgs } from '../utils/types';
 
 export const createRoomController = async (
@@ -19,4 +19,12 @@ export const getRoomsController = async () => {
   });
 
   return rooms;
+};
+
+export const getRoomController = async (roomId: string) => {
+  const room: any = await getRoom(roomId).catch((err) => {
+    throw new HttpQueryError(400, err);
+  });
+
+  return room;
 };

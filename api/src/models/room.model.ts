@@ -36,3 +36,12 @@ export const getRooms = () => {
       });
   });
 };
+
+export const getRoom = (roomId: string) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.room
+      .findUnique({ where: { roomId } })
+      .then(resolve)
+      .catch(() => reject(`Failed to find room with id ${roomId}`));
+  });
+};
