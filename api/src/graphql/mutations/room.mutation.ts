@@ -1,10 +1,16 @@
 import { ExpressContext } from 'apollo-server-express';
 import { GraphQLBoolean, GraphQLString } from 'graphql';
-import { createRoomController } from '../../controllers/room.controller';
+import {
+  createRoomController,
+  deleteRoomController,
+} from '../../controllers/room.controller';
 import { getUserFromContext } from '../../utils/jwt';
 import { createRoomArgs } from '../../utils/types';
 import { RoomType } from '../typeDefs/room.typeDef';
-import { validateCreateRoomArgs } from '../validators/room.validator';
+import {
+  validateCreateRoomArgs,
+  validateGetRoomArgs,
+} from '../validators/room.validator';
 
 export const CREATE_ROOM = {
   type: RoomType,
@@ -16,6 +22,18 @@ export const CREATE_ROOM = {
   async resolve(parent: any, requestArgs: any, context: ExpressContext) {
     const args: createRoomArgs = validateCreateRoomArgs(requestArgs);
     const loggedInUser: any = getUserFromContext(context);
-    return createRoomController(args, loggedInUser?.id);
+    return await createRoomController(args, loggedInUser?.id);
+  },
+};
+
+export const DELETE_ROOM = {
+  type: GraphQLString,
+  args: {
+    roomId: { type: GraphQLString },
+  },
+  async resolve(parent: any, args: any, context: ExpressContext) {
+    const roomId: string = validateGetRoomArgs(args);
+    const loggedInUser: any = getUserFromContext(context);
+    return await deleteRoomController(roomId, loggedInUser?.id);
   },
 };

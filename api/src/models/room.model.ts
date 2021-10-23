@@ -37,6 +37,21 @@ export const getRooms = () => {
   });
 };
 
+export const deleteRoom = (roomId: string, userId: string) => {
+  return new Promise(async (resolve, reject) => {
+    const room: any = await getRoom(roomId);
+    if (room?.creatorId !== userId) {
+      reject(`You don't have permission to delete room ${roomId}`);
+      return;
+    }
+
+    prismaClient.room
+      .delete({ where: { roomId } })
+      .then(() => resolve(`deleted room ${roomId} successfully`))
+      .catch(() => reject('Failed to delete room'));
+  });
+};
+
 export const getRoom = (roomId: string) => {
   return new Promise((resolve, reject) => {
     prismaClient.room

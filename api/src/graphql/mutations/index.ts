@@ -1,5 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
-import { CREATE_ROOM } from './room.mutation';
+import { CREATE_ROOM, DELETE_ROOM } from './room.mutation';
 import { LOGIN, REGISTER, UPDATE } from './user.mutation';
 
 export const Mutations = new GraphQLObjectType({
@@ -10,5 +10,6 @@ export const Mutations = new GraphQLObjectType({
     updateUser: UPDATE,
 
     createRoom: CREATE_ROOM,
+    deleteRoom: DELETE_ROOM,
   }),
 });
