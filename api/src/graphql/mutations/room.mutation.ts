@@ -1,15 +1,15 @@
 import { ExpressContext } from 'apollo-server-express';
 import { GraphQLBoolean, GraphQLString } from 'graphql';
-import {
-  createRoomController,
-  deleteRoomController,
-} from '../../controllers/room.controller';
 import { getUserFromContext } from '../../utils/jwt';
 import { createRoomArgs } from '../../utils/types';
 import { RoomType } from '../typeDefs/room.typeDef';
 import {
+  createRoomController,
+  deleteRoomController,
+} from '../../controllers/room.controller';
+import {
   validateCreateRoomArgs,
-  validateGetRoomArgs,
+  validateRoomId,
 } from '../validators/room.validator';
 
 export const CREATE_ROOM = {
@@ -32,8 +32,20 @@ export const DELETE_ROOM = {
     roomId: { type: GraphQLString },
   },
   async resolve(parent: any, args: any, context: ExpressContext) {
-    const roomId: string = validateGetRoomArgs(args);
+    const roomId: string = validateRoomId(args);
     const loggedInUser: any = getUserFromContext(context);
     return await deleteRoomController(roomId, loggedInUser?.id);
+  },
+};
+
+// TODO: complete join room
+export const JOIN_ROOM = {
+  type: RoomType,
+  args: {
+    roomId: { type: GraphQLString },
+  },
+  async resolve(parent: any, args: any, context: ExpressContext) {
+    const roomId: string = validateRoomId(args);
+    const loggedInUser: any = getUserFromContext(context);
   },
 };

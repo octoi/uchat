@@ -10,6 +10,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// model User {
+//   id       Int    @id @unique @default(autoincrement())
+//   email    String @unique
+//   name     String
+//   profile  String
+//   password String
+//   Room     Room[]
+// }
+
+// model Room {
+//   id          Int     @id @unique @default(autoincrement())
+//   roomId      String  @unique
+//   title       String
+//   description String
+//   isPrivate   Boolean
+//   creator     User    @relation(fields: [creatorId], references: [id])
+//   creatorId   Int
+//   // users       User[]
+//   // usersId     String[]
+// }
+
 model User {
   id       Int    @id @unique @default(autoincrement())
   email    String @unique
