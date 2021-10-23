@@ -1,6 +1,6 @@
 import { GraphQLList, GraphQLString } from 'graphql';
 import { RoomType } from '../typeDefs/room.typeDef';
-import { validateGetRoomArgs } from '../validators/room.validator';
+import { validateRoomId } from '../validators/room.validator';
 import {
   getRoomController,
   getRoomsController,
@@ -19,7 +19,7 @@ export const GET_ROOM = {
     roomId: { type: GraphQLString },
   },
   async resolve(parent: any, requestArgs: any) {
-    const roomId = validateGetRoomArgs(requestArgs);
+    const roomId = validateRoomId(requestArgs);
     return await getRoomController(roomId);
   },
 };

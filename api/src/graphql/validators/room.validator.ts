@@ -15,7 +15,7 @@ export const validateCreateRoomArgs = (
   return args;
 };
 
-export const validateGetRoomArgs = (args: any): string => {
+export const validateRoomId = (args: any): string => {
   if (!args.roomId) {
     throw new UserInputError('Room Id is not provided');
   }
