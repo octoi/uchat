@@ -16,3 +16,11 @@ export const validateRegisterArgs = (args: registerArgs): registerArgs => {
 
   return args;
 };
+
+export const validateGetUserArgs = (args: any): string => {
+  if (!args.email) {
+    throw new UserInputError('Email is not provided');
+  }
+
+  return args.email;
+};
