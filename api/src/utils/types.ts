@@ -1,3 +1,4 @@
+// user stuffs
 export interface loginArgs {
   email: string;
   password: string;
@@ -20,6 +21,7 @@ export interface updateArgs {
   isNewPassword: boolean;
 }
 
+// room stuff
 export interface createRoomArgs {
   title: string;
   description: string;
