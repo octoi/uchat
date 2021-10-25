@@ -60,3 +60,34 @@ export const getRoom = (roomId: string) => {
       .catch(() => reject(`Failed to find room with id ${roomId}`));
   });
 };
+
+export const getAllRoomData = (roomId: string) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.room
+      .findUnique({
+        where: { roomId },
+        include: {
+          creator: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profile: true,
+            },
+          },
+          joinedUsers: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profile: true,
+            },
+          },
+        },
+      })
+      .then(resolve)
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
