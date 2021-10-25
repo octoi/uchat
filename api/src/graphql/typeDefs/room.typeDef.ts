@@ -1,6 +1,7 @@
 import {
   GraphQLBoolean,
   GraphQLID,
+  GraphQLList,
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
@@ -25,5 +26,19 @@ export const RoomUserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     profile: { type: GraphQLString },
+  }),
+});
+
+// dev
+export const RoomDataType = new GraphQLObjectType({
+  name: 'RoomDataTypes',
+  fields: () => ({
+    id: { type: GraphQLID },
+    roomId: { type: GraphQLString },
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    isPrivate: { type: GraphQLBoolean },
+    creator: { type: UserType },
+    joinedUsers: { type: GraphQLList(UserType) },
   }),
 });

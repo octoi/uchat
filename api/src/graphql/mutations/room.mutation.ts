@@ -6,6 +6,7 @@ import { RoomType } from '../typeDefs/room.typeDef';
 import {
   createRoomController,
   deleteRoomController,
+  joinRoomController,
 } from '../../controllers/room.controller';
 import {
   validateCreateRoomArgs,
@@ -38,7 +39,6 @@ export const DELETE_ROOM = {
   },
 };
 
-// TODO: complete join room
 export const JOIN_ROOM = {
   type: RoomType,
   args: {
@@ -47,5 +47,6 @@ export const JOIN_ROOM = {
   async resolve(parent: any, args: any, context: ExpressContext) {
     const roomId: string = validateRoomId(args);
     const loggedInUser: any = getUserFromContext(context);
+    return await joinRoomController(roomId, loggedInUser?.id);
   },
 };

@@ -2,9 +2,11 @@ import { UserInputError, HttpQueryError } from 'apollo-server-core';
 import {
   createRoom,
   deleteRoom,
+  getAllRoomData,
   getRoom,
   getRooms,
 } from '../models/room.model';
+import { joinRoom } from '../models/user.model';
 import { createRoomArgs } from '../utils/types';
 
 export const createRoomController = async (
@@ -36,6 +38,19 @@ export const getRoomController = async (roomId: string) => {
 
 export const deleteRoomController = async (roomId: string, userId: string) => {
   return await deleteRoom(roomId, userId).catch((err) => {
+    throw new HttpQueryError(500, err);
+  });
+};
+
+export const joinRoomController = async (roomId: string, userId: number) => {
+  return await joinRoom(roomId, userId).catch((err) => {
+    throw new HttpQueryError(500, err);
+  });
+};
+
+// dev
+export const getRoomDataController = async (roomId: string) => {
+  return await getAllRoomData(roomId).catch((err) => {
     throw new HttpQueryError(500, err);
   });
 };

@@ -3,6 +3,7 @@
 import { loginArgs, registerArgs, updateArgs } from '../utils/types';
 import { prismaClient } from './prisma';
 import bcrypt from 'bcrypt';
+import { getRoom } from './room.model';
 
 export const registerUser = (data: registerArgs) => {
   return new Promise(async (resolve, reject) => {
@@ -78,6 +79,27 @@ export const findUser = (email: string) => {
       })
       .catch(() => {
         reject(`Failed to find user with email ${email}`);
+      });
+  });
+};
+
+export const joinRoom = (roomId: string, userId: number) => {
+  return new Promise(async (resolve, reject) => {
+    const room: any = await getRoom(roomId);
+
+    prismaClient.user
+      .update({
+        where: { id: userId },
+        data: {
+          joinedRooms: {
+            set: { roomId },
+          },
+        },
+      })
+      .then(() => resolve(room))
+      .catch((err) => {
+        console.log(err);
+        reject(`Failed to join room ${roomId}`);
       });
   });
 };

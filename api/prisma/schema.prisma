@@ -16,7 +16,7 @@ datasource db {
 //   name     String
 //   profile  String
 //   password String
-//   Room     Room[]
+//   rooms    Room[]
 // }
 
 // model Room {
@@ -27,17 +27,16 @@ datasource db {
 //   isPrivate   Boolean
 //   creator     User    @relation(fields: [creatorId], references: [id])
 //   creatorId   Int
-//   // users       User[]
-//   // usersId     String[]
 // }
 
 model User {
-  id       Int    @id @unique @default(autoincrement())
-  email    String @unique
-  name     String
-  profile  String
-  password String
-  rooms    Room[]
+  id           Int    @id @unique @default(autoincrement())
+  email        String @unique
+  name         String
+  profile      String
+  password     String
+  createdRooms Room[] @relation("createdRooms")
+  joinedRooms  Room[] @relation("joinedRooms")
 }
 
 model Room {
@@ -46,6 +45,7 @@ model Room {
   title       String
   description String
   isPrivate   Boolean
-  creator     User    @relation(fields: [creatorId], references: [id])
+  creator     User    @relation("createdRooms", fields: [creatorId], references: [id])
   creatorId   Int
+  joinedUsers User[]  @relation("joinedRooms")
 }
