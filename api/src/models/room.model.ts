@@ -61,6 +61,8 @@ export const getRoom = (roomId: string) => {
   });
 };
 
+// dev
+
 export const getAllRoomData = (roomId: string) => {
   return new Promise((resolve, reject) => {
     prismaClient.room
