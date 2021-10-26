@@ -6,7 +6,7 @@ import {
   getRoom,
   getRooms,
 } from '../models/room.model';
-import { joinRoom } from '../models/user.model';
+import { joinRoom, leaveRoom } from '../models/user.model';
 import { createRoomArgs } from '../utils/types';
 
 export const createRoomController = async (
@@ -44,6 +44,12 @@ export const deleteRoomController = async (roomId: string, userId: string) => {
 
 export const joinRoomController = async (roomId: string, userId: number) => {
   return await joinRoom(roomId, userId).catch((err) => {
+    throw new HttpQueryError(500, err);
+  });
+};
+
+export const leaveRoomController = async (roomId: string, userId: number) => {
+  return await leaveRoom(roomId, userId).catch((err) => {
     throw new HttpQueryError(500, err);
   });
 };
