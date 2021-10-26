@@ -103,3 +103,24 @@ export const joinRoom = (roomId: string, userId: number) => {
       });
   });
 };
+
+export const leaveRoom = (roomId: string, userId: number) => {
+  return new Promise(async (resolve, reject) => {
+    const room: any = await getRoom(roomId);
+
+    prismaClient.user
+      .update({
+        where: { id: userId },
+        data: {
+          joinedRooms: {
+            delete: { roomId },
+          },
+        },
+      })
+      .then(() => resolve(`Left from '${room.title}' successfully`))
+      .catch((err) => {
+        console.log(err);
+        reject(`Failed to leave room ${roomId}`);
+      });
+  });
+};

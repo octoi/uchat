@@ -7,6 +7,7 @@ import {
   createRoomController,
   deleteRoomController,
   joinRoomController,
+  leaveRoomController,
 } from '../../controllers/room.controller';
 import {
   validateCreateRoomArgs,
@@ -48,5 +49,17 @@ export const JOIN_ROOM = {
     const roomId: string = validateRoomId(args);
     const loggedInUser: any = getUserFromContext(context);
     return await joinRoomController(roomId, loggedInUser?.id);
+  },
+};
+
+export const LEAVE_ROOM = {
+  type: GraphQLString,
+  args: {
+    roomId: { type: GraphQLString },
+  },
+  async resolve(parent: any, args: any, context: ExpressContext) {
+    const roomId: string = validateRoomId(args);
+    const loggedInUser: any = getUserFromContext(context);
+    return await leaveRoomController(roomId, loggedInUser?.id);
   },
 };
