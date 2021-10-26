@@ -113,7 +113,7 @@ export const leaveRoom = (roomId: string, userId: number) => {
         where: { id: userId },
         data: {
           joinedRooms: {
-            delete: { roomId },
+            disconnect: { roomId },
           },
         },
       })
