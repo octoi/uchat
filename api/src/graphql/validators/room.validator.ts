@@ -22,3 +22,11 @@ export const validateRoomId = (args: any): string => {
 
   return args.roomId;
 };
+
+export const validateSearchQuery = (args: any): string => {
+  if (!args.query) {
+    throw new UserInputError('Search query is not provided');
+  }
+
+  return args.query;
+};

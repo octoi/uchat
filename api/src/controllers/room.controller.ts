@@ -5,6 +5,7 @@ import {
   getAllRoomData,
   getRoom,
   getRooms,
+  getSearchResult,
 } from '../models/room.model';
 import { joinRoom, leaveRoom } from '../models/user.model';
 import { createRoomArgs } from '../utils/types';
@@ -50,6 +51,12 @@ export const joinRoomController = async (roomId: string, userId: number) => {
 
 export const leaveRoomController = async (roomId: string, userId: number) => {
   return await leaveRoom(roomId, userId).catch((err) => {
+    throw new HttpQueryError(500, err);
+  });
+};
+
+export const searchRoomController = async (searchQuery: string) => {
+  return await getSearchResult(searchQuery).catch((err) => {
     throw new HttpQueryError(500, err);
   });
 };
