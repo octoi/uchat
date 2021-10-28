@@ -61,6 +61,35 @@ export const getRoom = (roomId: string) => {
   });
 };
 
+export const getSearchResult = (searchQuery: string) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.room
+      .findMany({
+        where: {
+          OR: [
+            { title: { contains: searchQuery } },
+            { description: { contains: searchQuery } },
+            { roomId: searchQuery },
+            { creator: { email: { contains: searchQuery } } },
+          ],
+          isPrivate: false,
+        },
+        include: {
+          creator: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profile: true,
+            },
+          },
+        },
+      })
+      .then(resolve)
+      .catch(() => reject(`Failed to search for ${searchQuery}`));
+  });
+};
+
 // dev
 
 export const getAllRoomData = (roomId: string) => {
