@@ -124,3 +124,33 @@ export const leaveRoom = (roomId: string, userId: number) => {
       });
   });
 };
+
+export const getJoinedRooms = (userId: number) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.user
+      .findUnique({
+        where: { id: userId },
+        select: {
+          joinedRooms: {
+            select: {
+              id: true,
+              roomId: true,
+              title: true,
+              description: true,
+              isPrivate: true,
+              creator: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                  profile: true,
+                },
+              },
+            },
+          },
+        },
+      })
+      .then((userData) => resolve(userData?.joinedRooms))
+      .catch(() => reject(`Failed to get joined rooms`));
+  });
+};
