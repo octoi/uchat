@@ -26,4 +26,5 @@ export interface createRoomArgs {
   title: string;
   description: string;
   isPrivate: boolean;
+  picture: string;
 }

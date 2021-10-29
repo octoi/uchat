@@ -19,6 +19,7 @@ export const CREATE_ROOM = {
   args: {
     title: { type: GraphQLString },
     description: { type: GraphQLString },
+    picture: { type: GraphQLString },
     isPrivate: { type: GraphQLBoolean },
   },
   async resolve(parent: any, requestArgs: any, context: ExpressContext) {
