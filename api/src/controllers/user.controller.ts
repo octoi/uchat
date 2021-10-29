@@ -1,12 +1,13 @@
-import { UserInputError } from 'apollo-server-errors';
+import { UserInputError, HttpQueryError } from 'apollo-server-core';
+import { generateToken } from '../utils/jwt';
+import { loginArgs, registerArgs, updateArgs } from '../utils/types';
 import {
   findUser,
+  getJoinedRooms,
   loginUser,
   registerUser,
   updateUser,
 } from '../models/user.model';
-import { generateToken } from '../utils/jwt';
-import { loginArgs, registerArgs, updateArgs } from '../utils/types';
 
 export const registerController = async (args: registerArgs) => {
   const user: any = await registerUser(args).catch((err) => {
@@ -47,4 +48,12 @@ export const getUserController = async (email: string) => {
   });
 
   return user;
+};
+
+export const getJoinedRoomsController = async (userId: number) => {
+  const joinedRooms: any = await getJoinedRooms(userId).catch((err) => {
+    throw new HttpQueryError(500, err);
+  });
+
+  return joinedRooms;
 };
