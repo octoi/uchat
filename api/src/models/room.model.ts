@@ -117,7 +117,7 @@ export const getAllRoomData = (roomId: string) => {
         },
       })
       .then(resolve)
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
       });
   });

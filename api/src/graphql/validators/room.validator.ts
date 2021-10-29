@@ -7,6 +7,7 @@ export const validateCreateRoomArgs = (
   if (
     !args.title ||
     !args.description ||
+    !args.picture ||
     typeof args.isPrivate == 'undefined'
   ) {
     throw new UserInputError('required fields not found');
