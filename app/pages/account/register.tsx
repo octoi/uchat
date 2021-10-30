@@ -1,12 +1,13 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { NextPage } from 'next';
+import { useState } from '@hookstate/core';
 import Layout from '@/components/Layout';
 import Input from '@/components/account/Input';
 
 const Register: NextPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const nameState = useState('');
+  const emailState = useState('');
+  const passwordState = useState('');
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,22 +24,22 @@ const Register: NextPage = () => {
           <Input
             placeholder='Name'
             className='mt-6'
-            state={name}
-            setState={setName}
+            state={nameState.get()}
+            setState={nameState.set}
           />
           <Input
             placeholder='Email'
             className='mt-3'
             type='email'
-            state={email}
-            setState={setEmail}
+            state={emailState.get()}
+            setState={emailState.set}
           />
           <Input
             placeholder='Password'
             className='mt-3'
             type='password'
-            state={password}
-            setState={setPassword}
+            state={passwordState.get()}
+            setState={emailState.set}
           />
           <button
             type='submit'
