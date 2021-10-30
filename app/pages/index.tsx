@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from '@/components/core/Layout';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {

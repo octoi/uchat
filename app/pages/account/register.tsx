@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import { NextPage } from 'next';
 import { useState } from '@hookstate/core';
-import Layout from '@/components/Layout';
+import Layout from '@/components/core/Layout';
 import Input from '@/components/account/Input';
 
 const Register: NextPage = () => {
