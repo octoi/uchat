@@ -17,6 +17,7 @@ export default function Layout({ children, title, description }: Props) {
           content={description ? description : 'Chut upp :)'}
         />
       </Head>
+      <main className='bg-gray-900 h-screen'>{children}</main>
     </div>
   );
 }
