@@ -13,7 +13,6 @@ export default function AuthChecker({ children }: ChildrenProps) {
 
   useEffect(() => {
     if (!user) {
-      console.log('pushing');
       router.push(Paths.register);
     }
   }, [user]);

@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { Input as ChakraInput } from '@chakra-ui/react';
 
 interface Props {
   placeholder: string;
@@ -16,13 +17,17 @@ export default function Input({
   setState,
 }: Props) {
   return (
-    <input
+    <ChakraInput
       type={type ? type : 'text'}
       required
       placeholder={placeholder}
-      className={`${className} p-4 rounded-md outline-none transition bg-gray-800 border border-gray-800 focus:border-green-400`}
       value={state}
       onChange={(e) => setState(e.target.value)}
+      variant='filled'
+      mt={4}
+      className={`${className} p-7`}
+      focusBorderColor='teal.400'
+      autoComplete='on'
     />
   );
 }

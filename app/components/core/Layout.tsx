@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import AuthChecker from './AuthChecker';
 
 interface Props {
   children: React.ReactNode;
@@ -17,9 +18,7 @@ export default function Layout({ children, title, description }: Props) {
           content={description ? description : 'Chut upp :)'}
         />
       </Head>
-      <main className='bg-gray-900 bg-opacity-95 text-gray-200  h-screen'>
-        {children}
-      </main>
+      <AuthChecker>{children}</AuthChecker>
     </div>
   );
 }
