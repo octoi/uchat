@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import ChakraWrapper from './ChakraWrapper';
+import AuthChecker from './AuthChecker';
 
 interface Props {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ export default function Layout({ children, title, description }: Props) {
           content={description ? description : 'Chut upp :)'}
         />
       </Head>
-      <ChakraWrapper>{children}</ChakraWrapper>
+      <AuthChecker>{children}</AuthChecker>
     </div>
   );
 }

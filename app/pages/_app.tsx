@@ -2,14 +2,14 @@ import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import ApolloWrapper from '@/components/core/ApolloWrapper';
-import AuthChecker from '@/components/core/AuthChecker';
+import ChakraWrapper from '@/components/core/ChakraWrapper';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloWrapper>
-      <AuthChecker>
+      <ChakraWrapper>
         <Component {...pageProps} />;
-      </AuthChecker>
+      </ChakraWrapper>
     </ApolloWrapper>
   );
 }
