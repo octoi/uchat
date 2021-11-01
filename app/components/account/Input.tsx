@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   state: string;
   setState: Dispatch<SetStateAction<string>>;
+  isDisabled?: boolean;
 }
 
 export default function Input({
@@ -15,6 +16,7 @@ export default function Input({
   className,
   state,
   setState,
+  isDisabled,
 }: Props) {
   return (
     <ChakraInput
@@ -28,6 +30,7 @@ export default function Input({
       className={`${className} p-7`}
       focusBorderColor='teal.400'
       autoComplete='on'
+      disabled={isDisabled}
     />
   );
 }

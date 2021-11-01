@@ -5,7 +5,7 @@ import { userStore } from '@/state/user.state';
 import { useState } from '@hookstate/core';
 import { Paths } from '@/utils/constants';
 
-const redirectBlacklistedPaths = ['/account/login', '/account/register'];
+const redirectBlacklistedPaths = ['/account/login', '/account/register', '/'];
 
 export default function AuthChecker({ children }: ChildrenProps) {
   const userState = useState(userStore);
@@ -15,10 +15,13 @@ export default function AuthChecker({ children }: ChildrenProps) {
 
   useEffect(() => {
     const pathname = router.pathname;
-    if (redirectBlacklistedPaths.includes(pathname)) return;
 
     if (!user) {
+      if (redirectBlacklistedPaths.includes(pathname)) return;
       router.push(Paths.login);
+    } else {
+      if (!redirectBlacklistedPaths.includes(pathname)) return;
+      router.push('/app');
     }
   }, [user]);
 

@@ -82,18 +82,21 @@ const Register: NextPage = () => {
               placeholder='Name'
               state={nameState.get()}
               setState={nameState.set}
+              isDisabled={loadingState.get()}
             />
             <Input
               placeholder='Email'
               type='email'
               state={emailState.get()}
               setState={emailState.set}
+              isDisabled={loadingState.get()}
             />
             <Input
               placeholder='Password'
               type='password'
               state={passwordState.get()}
               setState={passwordState.set}
+              isDisabled={loadingState.get()}
             />
             <button
               type='submit'
