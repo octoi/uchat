@@ -5,30 +5,20 @@ export const setToken = (token: string) => {
   cookie.set('token', token);
 };
 
-export const getUserFromToken = (token: string) => {
-  return new Promise((resolve, reject) => {
-    const decodedData: any = jwtDecode(token);
+export const getUserFromToken = (token: string): Boolean | any => {
+  const decodedData: any = jwtDecode(token);
 
-    if (decodedData?.exp * 1000 < Date.now()) {
-      reject('Expired token');
-      return;
-    }
+  if (decodedData?.exp * 1000 < Date.now()) {
+    return false;
+  }
 
-    resolve(decodedData);
-  });
+  return decodedData;
 };
 
 export const getUserFromCookie = () => {
-  return new Promise((resolve, reject) => {
-    const token = cookie.get('token');
+  const token = cookie.get('token');
 
-    if (!token) {
-      reject('Could not find token');
-      return;
-    }
+  if (!token) return false;
 
-    getUserFromToken(token)
-      .then((decodedData: any) => resolve({ ...decodedData, token }))
-      .catch(reject);
-  });
+  return getUserFromToken(token);
 };

@@ -43,7 +43,7 @@ const Register: NextPage = () => {
         setToken(responseData?.token);
         userState.set(responseData);
 
-        // router.push(Paths.app);
+        router.push(Paths.app);
         toast({
           title: `Welcome ${nameState.get()} to Uchat 😄`,
           status: 'success',
@@ -70,12 +70,14 @@ const Register: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout
+      title='Register'
+      description='register in Unknown Chat to hangout with friends'
+    >
       <div className='h-screen flex justify-center items-center'>
         <Flex direction='column' p={8} className='w-full max-w-lg'>
           <form onSubmit={handleFormSubmit}>
-            {/* <h2 className='text-3xl font-bold mb-5'>Register</h2> */}
-            <h2 className='text-3xl font-bold mb-5'>{userState.get()?.name}</h2>
+            <h2 className='text-3xl font-bold mb-5'>Register</h2>
             <Input
               placeholder='Name'
               state={nameState.get()}

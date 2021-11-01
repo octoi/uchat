@@ -2,10 +2,12 @@ import { UserType } from '@/types/user.types';
 import { getUserFromCookie } from '@/utils/jwt';
 import { createState } from '@hookstate/core';
 
-let defaultUserState: UserType | null = null;
+const getDefaultUserState = () => {
+  const userDataFromSession = getUserFromCookie();
 
-getUserFromCookie().then((userData: any) => {
-  defaultUserState = userData;
-});
+  if (userDataFromSession) return userDataFromSession;
 
-export const userStore = createState<UserType | null>(defaultUserState);
+  return null;
+};
+
+export const userStore = createState<UserType | null>(getDefaultUserState);
