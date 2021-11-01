@@ -33,3 +33,27 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation (
+    $name: String
+    $email: String
+    $profile: String
+    $isNewPassword: Boolean
+    $password: String
+  ) {
+    updateUser(
+      name: $name
+      email: $email
+      profile: $profile
+      isNewPassword: $isNewPassword
+      password: $password
+    ) {
+      id
+      name
+      email
+      profile
+      token
+    }
+  }
+`;

@@ -5,6 +5,11 @@ export const setToken = (token: string) => {
   cookie.set('token', token);
 };
 
+export const getToken = (): string => {
+  const token = cookie.get('token') || '';
+  return token;
+};
+
 export const getUserFromToken = (token: string): Boolean | any => {
   const decodedData: any = jwtDecode(token);
 
