@@ -5,10 +5,7 @@ import { createState } from '@hookstate/core';
 const getDefaultUserState = () => {
   const userDataFromSession = getUserFromCookie();
 
-  if (userDataFromSession) {
-    console.log(userDataFromSession);
-    return userDataFromSession;
-  }
+  if (userDataFromSession) return userDataFromSession;
 
   return null;
 };
