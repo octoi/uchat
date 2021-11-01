@@ -57,17 +57,18 @@ const Login: NextPage = () => {
           isClosable: true,
           duration: 5000,
         });
+      })
+      .finally(() => {
+        emailState.set('');
+        passwordState.set('');
+        loadingState.set(false);
       });
-
-    emailState.set('');
-    passwordState.set('');
-    loadingState.set(false);
   };
 
   return (
     <Layout
-      title='Register'
-      description='register in Unknown Chat to hangout with friends'
+      title='Login'
+      description='Login to Unknown Chat for hanging with friends'
     >
       <div className='h-screen flex justify-center items-center'>
         <Flex direction='column' p={8} className='w-full max-w-lg'>
@@ -78,12 +79,14 @@ const Login: NextPage = () => {
               type='email'
               state={emailState.get()}
               setState={emailState.set}
+              isDisabled={loadingState.get()}
             />
             <Input
               placeholder='Password'
               type='password'
               state={passwordState.get()}
               setState={passwordState.set}
+              isDisabled={loadingState.get()}
             />
             <button
               type='submit'
