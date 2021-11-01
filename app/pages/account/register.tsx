@@ -14,7 +14,7 @@ import Link from 'next/link';
 import Layout from '@/components/core/Layout';
 import Input from '@/components/account/Input';
 
-const Register: NextPage = () => {
+const RegisterPage: NextPage = () => {
   const toast = useToast();
   const router = useRouter();
 
@@ -83,6 +83,7 @@ const Register: NextPage = () => {
               state={nameState.get()}
               setState={nameState.set}
               isDisabled={loadingState.get()}
+              required
             />
             <Input
               placeholder='Email'
@@ -90,6 +91,7 @@ const Register: NextPage = () => {
               state={emailState.get()}
               setState={emailState.set}
               isDisabled={loadingState.get()}
+              required
             />
             <Input
               placeholder='Password'
@@ -97,6 +99,7 @@ const Register: NextPage = () => {
               state={passwordState.get()}
               setState={passwordState.set}
               isDisabled={loadingState.get()}
+              required
             />
             <button
               type='submit'
@@ -125,4 +128,4 @@ const Register: NextPage = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;

@@ -4,5 +4,5 @@ export enum Paths {
   register = '/account/register',
   login = '/account/login',
   app = '/app',
-  settings = '/settings',
+  settings = '/account/settings',
 }

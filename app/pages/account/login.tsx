@@ -13,7 +13,7 @@ import Link from 'next/link';
 import Layout from '@/components/core/Layout';
 import Input from '@/components/account/Input';
 
-const Login: NextPage = () => {
+const LoginPage: NextPage = () => {
   const toast = useToast();
   const router = useRouter();
 
@@ -80,6 +80,7 @@ const Login: NextPage = () => {
               state={emailState.get()}
               setState={emailState.set}
               isDisabled={loadingState.get()}
+              required
             />
             <Input
               placeholder='Password'
@@ -87,6 +88,7 @@ const Login: NextPage = () => {
               state={passwordState.get()}
               setState={passwordState.set}
               isDisabled={loadingState.get()}
+              required
             />
             <button
               type='submit'
@@ -115,4 +117,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

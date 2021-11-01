@@ -8,6 +8,7 @@ interface Props {
   state: string;
   setState: Dispatch<SetStateAction<string>>;
   isDisabled?: boolean;
+  required?: boolean;
 }
 
 export default function Input({
@@ -17,11 +18,12 @@ export default function Input({
   state,
   setState,
   isDisabled,
+  required,
 }: Props) {
   return (
     <ChakraInput
       type={type ? type : 'text'}
-      required
+      required={required}
       placeholder={placeholder}
       value={state}
       onChange={(e) => setState(e.target.value)}
