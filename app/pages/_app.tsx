@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloWrapper>
       <ChakraWrapper>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </ChakraWrapper>
     </ApolloWrapper>
   );
