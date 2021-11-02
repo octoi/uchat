@@ -6,9 +6,8 @@ import { LOGIN_USER } from '@/graphql/account/account.mutation';
 import { Flex, useToast } from '@chakra-ui/react';
 import { BeatLoader } from 'react-spinners';
 import { Paths } from '@/utils/constants';
-import { setToken } from '@/utils/jwt';
 import { useRouter } from 'next/router';
-import { userStore } from '@/state/user.state';
+import { setUser } from '@/utils/user.utils';
 import Link from 'next/link';
 import Layout from '@/components/core/Layout';
 import Input from '@/components/account/Input';
@@ -20,7 +19,6 @@ const LoginPage: NextPage = () => {
   const emailState = useState('');
   const passwordState = useState('');
   const loadingState = useState(false);
-  const userState = useState(userStore);
 
   const [loginUser] = useMutation(LOGIN_USER);
 
@@ -36,8 +34,7 @@ const LoginPage: NextPage = () => {
     loginUser({ variables: formData })
       .then(({ data }) => {
         const responseData = data?.loginUser;
-        setToken(responseData?.token);
-        userState.set(responseData);
+        setUser(responseData);
 
         router.push(Paths.app);
         toast({

@@ -1,28 +1,54 @@
-import { FormEvent } from 'react';
 import { NextPage } from 'next';
+import { useEffect, FormEvent } from 'react';
 import { Flex, Image, useToast } from '@chakra-ui/react';
 import { useState } from '@hookstate/core';
 import { userStore } from '@/state/user.state';
 import { BeatLoader } from 'react-spinners';
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '@/graphql/account/account.mutation';
-import { setToken } from '@/utils/jwt';
+import { getUserAvatar } from '@/utils/avatars';
+import { setUser, logoutUser } from '@/utils/user.utils';
+import { useRouter } from 'next/router';
+import { Paths } from '@/utils/constants';
 import Layout from '@/components/core/Layout';
 import Input from '@/components/account/Input';
-import { getUserAvatar } from '@/utils/avatars';
 
 const SettingsPage: NextPage = () => {
   const userState = useState(userStore);
   const toast = useToast();
+  const router = useRouter();
 
   const user = userState.get();
 
   const nameState = useState('');
   const profileState = useState('');
   const passwordState = useState('');
+
   const loadingState = useState(false);
+  const canUpdateState = useState(false);
+
+  const isButtonDisabled = !canUpdateState.get()
+    ? !canUpdateState.get()
+    : loadingState.get();
 
   const [updateUser] = useMutation(UPDATE_USER);
+
+  // for useEffect
+  const nameStateValue = nameState.get();
+  const profileStateValue = profileState.get();
+  const passwordStateValue = passwordState.get();
+
+  useEffect(() => {
+    if (
+      nameStateValue.length > 0 ||
+      profileStateValue.length > 0 ||
+      passwordStateValue.length > 0
+    ) {
+      canUpdateState.set(true);
+    } else {
+      canUpdateState.set(false);
+    }
+  }, [nameStateValue, profileStateValue, passwordStateValue]);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,10 +73,7 @@ const SettingsPage: NextPage = () => {
 
     updateUser({ variables: formData })
       .then(({ data }) => {
-        const responseData = data?.updateUser;
-        setToken(responseData?.token);
-
-        userState.set(responseData);
+        setUser(data?.updateUser);
 
         toast({
           title: 'Updated Profile 🦋',
@@ -76,6 +99,14 @@ const SettingsPage: NextPage = () => {
         passwordState.set('');
         loadingState.set(false);
       });
+  };
+
+  const logout = () => {
+    const permission = window.confirm('Are you sure ?');
+    if (!permission) return;
+
+    logoutUser();
+    router.push(Paths.login);
   };
 
   return (
@@ -114,11 +145,11 @@ const SettingsPage: NextPage = () => {
               <button
                 type='submit'
                 className={`mt-6 w-full bg-green-400 text-gray-900 font-medium p-4 rounded-md transition duration-500 ${
-                  loadingState.get()
+                  isButtonDisabled
                     ? 'bg-green-600 cursor-not-allowed'
                     : 'hover:bg-green-600'
                 }`}
-                disabled={loadingState.get()}
+                disabled={isButtonDisabled}
               >
                 {loadingState.get() ? (
                   <BeatLoader size={8} color='white' />
@@ -128,6 +159,12 @@ const SettingsPage: NextPage = () => {
               </button>
             </form>
           )}
+          <button
+            onClick={logout}
+            className='mt-4 w-full bg-red-400 text-gray-900 font-medium p-4 rounded-md transition duration-500'
+          >
+            Logout
+          </button>
         </Flex>
       </div>
     </Layout>
