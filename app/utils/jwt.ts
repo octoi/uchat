@@ -10,6 +10,10 @@ export const getToken = (): string => {
   return token;
 };
 
+export const removeToken = () => {
+  cookie.remove('token');
+};
+
 export const getUserFromToken = (token: string): Boolean | any => {
   const decodedData: any = jwtDecode(token);
 
