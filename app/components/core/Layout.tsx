@@ -1,14 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
 import AuthChecker from './AuthChecker';
+import Header from '../shared/Header';
 
 interface Props {
   children: React.ReactNode;
   title?: string;
   description?: string;
+  hideDefaultHeader?: boolean;
 }
 
-export default function Layout({ children, title, description }: Props) {
+export default function Layout({ children, title, description, hideDefaultHeader }: Props) {
   return (
     <div>
       <Head>
@@ -18,6 +20,7 @@ export default function Layout({ children, title, description }: Props) {
           content={description ? description : 'Chut upp :)'}
         />
       </Head>
+      {!hideDefaultHeader && <Header />}
       <AuthChecker>{children}</AuthChecker>
     </div>
   );
