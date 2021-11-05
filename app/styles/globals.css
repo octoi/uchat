@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.sample {
-  background: #1c2331 !important;
+:root {
+  --darkest: #0e0e10;
+  --darker: #19191b;
+  --dark: #1f1e22;
+  --purple: #9146ff;
+  --purple-dark: #772ce8;
+  --white: #ffffff;
+  --grey: #f7f7f8;
+}
+
+body {
+  background: var(--darkest) !important;
+  color: var(--grey);
 }
