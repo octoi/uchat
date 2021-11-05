@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Input as ChakraInput } from '@chakra-ui/react';
+import styles from '@/styles/Accounts.module.css';
 
 interface Props {
   placeholder: string;
@@ -29,8 +30,7 @@ export default function Input({
       onChange={(e) => setState(e.target.value)}
       variant='filled'
       mt={4}
-      className={`${className} p-7`}
-      focusBorderColor='teal.400'
+      className={`${className} ${styles.borderedInput}  p-7`}
       autoComplete='on'
       disabled={isDisabled}
     />
