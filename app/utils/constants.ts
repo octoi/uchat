@@ -5,4 +5,6 @@ export enum Paths {
   login = '/account/login',
   app = '/app',
   settings = '/account/settings',
+  explore = '/app/explore',
+  newRoom = '/room/new',
 }

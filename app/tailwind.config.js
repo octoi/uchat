@@ -12,6 +12,16 @@ module.exports = {
       gray: colors.coolGray,
       green: colors.teal,
       red: colors.rose,
+      app: {
+        darkest: '#0e0e10',
+        darker: '#19191b',
+        dark: '#1f1e22',
+        purpleLight: '#A971FE',
+        purple: '#9146ff',
+        purpleDark: '#772ce8',
+        white: '#ffffff',
+        grey: '#f7f7f8',
+      },
     },
   },
   variants: {

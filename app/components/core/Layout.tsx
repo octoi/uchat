@@ -10,11 +10,17 @@ interface Props {
   hideDefaultHeader?: boolean;
 }
 
-export default function Layout({ children, title, description, hideDefaultHeader }: Props) {
+export default function Layout({
+  children,
+  title,
+  description,
+  hideDefaultHeader,
+}: Props) {
   return (
     <div>
       <Head>
         <title>{title ? title : 'Uchat'}</title>
+        <link rel='icon' href='/favicon.svg' />
         <meta
           name='description'
           content={description ? description : 'Chut upp :)'}
