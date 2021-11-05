@@ -1,3 +1,7 @@
 .link {
   @apply hidden md:flex font-medium ml-5 text-lg cursor-pointer transition duration-500 hover:text-app-purpleLight;
 }
+
+.button {
+  @apply py-2 px-4 text-app-grey rounded font-medium transition duration-500;
+}
