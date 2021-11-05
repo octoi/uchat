@@ -7,4 +7,5 @@ export enum Paths {
   settings = '/account/settings',
   explore = '/app/explore',
   newRoom = '/room/new',
+  terms = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 }
