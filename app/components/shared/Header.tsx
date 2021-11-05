@@ -10,7 +10,7 @@ export default function Header() {
   const userData = userState.get();
 
   return (
-    <nav>
+    <nav className='fixed top-0 w-full'>
       <Flex
         direction='row'
         justifyContent='space-between'
