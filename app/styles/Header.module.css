@@ -1,0 +1,3 @@
+.link {
+  @apply hidden md:flex font-medium ml-5 text-lg cursor-pointer transition duration-500 hover:text-app-purpleLight;
+}
