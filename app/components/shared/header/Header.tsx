@@ -4,6 +4,7 @@ import { userStore } from '@/state/user.state';
 import { Flex } from '@chakra-ui/react';
 import { useState } from '@hookstate/core';
 import { Paths } from '@/utils/constants';
+import NonAuthButton from './NonAuthButton';
 
 export default function Header() {
   const userState = useState(userStore);
@@ -28,7 +29,7 @@ export default function Header() {
           <Link href={Paths.explore} passHref>
             <p className={styles.link}>Explore</p>
           </Link>
-          <Link href={Paths.explore} passHref>
+          <Link href={Paths.terms} passHref>
             <p className={styles.link}>Terms And Policy</p>
           </Link>
         </Flex>
@@ -42,11 +43,12 @@ export default function Header() {
           </Link>
           <Link href={Paths.register} passHref>
             <button
-              className={`${styles.button} ml-5 bg-app-purple hover:bg-app-purpleDark`}
+              className={`${styles.button} ml-3 md:ml-5 bg-app-purple hover:bg-app-purpleDark`}
             >
               Sign Up
             </button>
           </Link>
+          <NonAuthButton />
         </Flex>
       </Flex>
     </nav>

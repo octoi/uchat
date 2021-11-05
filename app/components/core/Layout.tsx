@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import AuthChecker from './AuthChecker';
-import Header from '../shared/Header';
+import Header from '../shared/header/Header';
 
 interface Props {
   children: React.ReactNode;
