@@ -9,6 +9,7 @@ export enum Paths {
   terms = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   newRoom = '/room/new',
   room = `/room`,
+  notFound = '/404',
 }
 
 export const redirectToRoom = (roomId: string): string => {

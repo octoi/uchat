@@ -20,7 +20,7 @@ export default function Header() {
         <Flex direction='row' alignItems='center'>
           <Link href={Paths.app} passHref>
             {/* eslint-disable-next-line @next/next/no-img-element*/}
-            <img src='/logo.svg' alt='Uchat' className='w-10' />
+            <img src='/logo.svg' alt='Uchat' className='w-10 cursor-pointer' />
           </Link>
           <Link href={Paths.explore} passHref>
             <p className={styles.link}>Explore</p>

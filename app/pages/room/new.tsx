@@ -5,7 +5,7 @@ import { Flex, useToast, Textarea, Select } from '@chakra-ui/react';
 import { BeatLoader } from 'react-spinners';
 import { Paths, redirectToRoom } from '@/utils/constants';
 import { useRouter } from 'next/router';
-import { CREATE_ROOM } from '@/graphql/app/room.mutation';
+import { CREATE_ROOM } from '@/graphql/room/room.mutation';
 import { getRoomAvatar } from '@/utils/avatars';
 import Link from 'next/link';
 import styles from '@/styles/Accounts.module.css';
