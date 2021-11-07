@@ -14,7 +14,7 @@ export default function LoggedInUserRHS() {
   const [showComponent, setShowComponent] = React.useState(false);
 
   React.useEffect(() => {
-    setShowComponent(typeof userData !== null);
+    setShowComponent(userData !== null);
   }, [userData]);
 
   if (!showComponent) return null;

@@ -13,7 +13,7 @@ export default function GuestUserRHS() {
   const [showComponent, setShowComponent] = React.useState(false);
 
   React.useEffect(() => {
-    setShowComponent(typeof userData === null);
+    setShowComponent(userData === null);
   }, [userData]);
 
   if (!showComponent) return null;
@@ -27,7 +27,7 @@ export default function GuestUserRHS() {
       </Link>
       <Link href={Paths.register} passHref>
         <button
-          className={`${styles.button} ml-3 md:ml-5 bg-app-purple hover:bg-app-purpleDark`}
+          className={`${styles.button} ml-3 md:ml-5 bg-app-purpleLight hover:bg-app-purple`}
         >
           Sign Up
         </button>
