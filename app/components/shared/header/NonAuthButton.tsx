@@ -3,6 +3,9 @@ import HeaderModal from './HeaderModal';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import { Paths } from '@/utils/constants';
+import { BiLogIn } from 'react-icons/bi';
+import { RiQuillPenLine } from 'react-icons/ri';
+import { VscLaw } from 'react-icons/vsc';
 
 export default function NonAuthButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,32 +25,48 @@ export default function NonAuthButton() {
             width='100%'
             background='var(--dark)'
             py={7}
+            mt={2}
             _hover={{ background: 'var(--purple-light)' }}
+            display='flex'
+            flexDirection='row'
+            justifyContent='flex-start'
+            alignItems='center'
           >
+            <BiLogIn className='mr-2' size='21' />
             Log In
           </Button>
         </Link>
         <Link href={Paths.register} passHref>
           <Button
             size='lg'
-            mt={2}
             width='100%'
             background='var(--dark)'
             py={7}
+            mt={2}
             _hover={{ background: 'var(--purple-light)' }}
+            display='flex'
+            flexDirection='row'
+            justifyContent='flex-start'
+            alignItems='center'
           >
+            <RiQuillPenLine className='mr-2' size='21' />
             Sign Up
           </Button>
         </Link>
         <Link href={Paths.terms} passHref>
           <Button
             size='lg'
-            mt={2}
             width='100%'
             background='var(--dark)'
             py={7}
+            mt={2}
             _hover={{ background: 'var(--purple-light)' }}
+            display='flex'
+            flexDirection='row'
+            justifyContent='flex-start'
+            alignItems='center'
           >
+            <VscLaw className='mr-2' size='21' />
             Terms & Policy
           </Button>
         </Link>
