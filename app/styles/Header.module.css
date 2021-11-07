@@ -3,5 +3,5 @@
 }
 
 .button {
-  @apply text-sm py-2 px-3 md:px-4 md:text-base text-app-grey rounded font-medium transition duration-500;
+  @apply hidden md:flex text-sm py-2 px-3 md:px-4 md:text-base text-app-grey rounded font-medium transition duration-500;
 }
