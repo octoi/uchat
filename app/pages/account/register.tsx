@@ -99,10 +99,10 @@ export default function RegisterPage() {
             />
             <button
               type='submit'
-              className={`mt-6 w-full bg-app-purple text-app-grey font-medium p-4 rounded-md transition duration-500 ${
+              className={`mt-6 w-full bg-app-purpleLight text-app-grey font-medium p-4 rounded-md transition duration-500 ${
                 loadingState.get()
-                  ? 'bg-app-purpleDark cursor-not-allowed'
-                  : 'hover:bg-app-purpleDark'
+                  ? 'bg-app-purple cursor-not-allowed'
+                  : 'hover:bg-app-purple'
               }`}
               disabled={loadingState.get()}
             >

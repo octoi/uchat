@@ -22,7 +22,7 @@ export default function NonAuthButton() {
             width='100%'
             background='var(--dark)'
             py={7}
-            _hover={{ background: 'var(--purple)' }}
+            _hover={{ background: 'var(--purple-light)' }}
           >
             Log In
           </Button>
@@ -34,7 +34,7 @@ export default function NonAuthButton() {
             width='100%'
             background='var(--dark)'
             py={7}
-            _hover={{ background: 'var(--purple)' }}
+            _hover={{ background: 'var(--purple-light)' }}
           >
             Sign Up
           </Button>
@@ -46,7 +46,7 @@ export default function NonAuthButton() {
             width='100%'
             background='var(--dark)'
             py={7}
-            _hover={{ background: 'var(--purple)' }}
+            _hover={{ background: 'var(--purple-light)' }}
           >
             Terms & Policy
           </Button>
