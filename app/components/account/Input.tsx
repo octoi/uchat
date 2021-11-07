@@ -10,6 +10,7 @@ interface Props {
   setState: Dispatch<SetStateAction<string>>;
   isDisabled?: boolean;
   required?: boolean;
+  mt?: number;
 }
 
 export default function Input({
@@ -20,6 +21,7 @@ export default function Input({
   setState,
   isDisabled,
   required,
+  mt,
 }: Props) {
   return (
     <ChakraInput
@@ -29,7 +31,7 @@ export default function Input({
       value={state}
       onChange={(e) => setState(e.target.value)}
       variant='filled'
-      mt={4}
+      mt={mt ? mt : 4}
       className={`${className} ${styles.borderedInput}  p-7`}
       autoComplete='on'
       disabled={isDisabled}
