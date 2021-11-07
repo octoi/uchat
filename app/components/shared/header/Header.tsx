@@ -34,8 +34,8 @@ export default function Header() {
             <p className={styles.link}>Terms And Policy</p>
           </Link>
         </Flex>
-        {userData && <LoggedInUserRHS />}
-        {!userData && <GuestUserRHS />}
+        <LoggedInUserRHS />
+        <GuestUserRHS />
       </Flex>
     </nav>
   );
