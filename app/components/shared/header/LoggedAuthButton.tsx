@@ -1,10 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import HeaderModal from './HeaderModal';
-import { Button, useDisclosure } from '@chakra-ui/react';
+import { Button, useDisclosure, Flex } from '@chakra-ui/react';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import { Paths } from '@/utils/constants';
 import { useState } from '@hookstate/core';
 import { userStore } from '@/state/user.state';
+import { IoMdSettings } from 'react-icons/io';
 
 export default function LoggedAuthButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,48 +15,50 @@ export default function LoggedAuthButton() {
 
   return (
     <div>
-      <div>
-        {/*eslint-disable-next-line @next/next/no-img-element*/}
+      <div
+        onClick={onOpen}
+        className='ml-3 w-10 md:ml-5 rounded-full object-contain cursor-pointer transition duration-500 hover:opacity-70'
+      >
         <img
           src={userData?.profile}
           alt={userData?.name}
-          className='ml-3 md:ml-5 rounded transition duration-500'
+          className='object-contain rounded-full'
         />
       </div>
-      <HeaderModal title='Options' close={onClose} isOpen={isOpen}>
-        <Link href={Paths.login} passHref>
+      <HeaderModal close={onClose} isOpen={isOpen} title='Options'>
+        <Flex
+          direction='row'
+          justifyContent='space-between'
+          alignItems='center'
+          mb={10}
+          mt={5}
+        >
+          <Flex direction='row' alignItems='center'>
+            <img
+              src={userData?.profile}
+              alt={userData?.name}
+              className='w-16 h-16 rounded-full object-cover'
+            />
+            <Flex ml={3} direction='column'>
+              <h2 className='text-xl font-medium text-app-white'>
+                {userData?.name}
+              </h2>
+              <h3 className='text-lg text-app-grey'>{userData?.email}</h3>
+            </Flex>
+          </Flex>
+          <button className='text-2xl text-app-grey transition duration-500 hover:opacity-70'>
+            <IoMdSettings />
+          </button>
+        </Flex>
+        <Link href={Paths.newRoom} passHref>
           <Button
             size='lg'
             width='100%'
             background='var(--dark)'
             py={7}
-            _hover={{ background: 'var(--purple)' }}
+            _hover={{ background: 'var(--purple-light)' }}
           >
-            Log In
-          </Button>
-        </Link>
-        <Link href={Paths.register} passHref>
-          <Button
-            size='lg'
-            mt={2}
-            width='100%'
-            background='var(--dark)'
-            py={7}
-            _hover={{ background: 'var(--purple)' }}
-          >
-            Sign Up
-          </Button>
-        </Link>
-        <Link href={Paths.terms} passHref>
-          <Button
-            size='lg'
-            mt={2}
-            width='100%'
-            background='var(--dark)'
-            py={7}
-            _hover={{ background: 'var(--purple)' }}
-          >
-            Terms & Policy
+            New Room
           </Button>
         </Link>
       </HeaderModal>
