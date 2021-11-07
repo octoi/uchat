@@ -1,16 +1,11 @@
 import Link from 'next/link';
 import styles from '@/styles/Header.module.css';
-import { userStore } from '@/state/user.state';
 import { Flex } from '@chakra-ui/react';
-import { useState } from '@hookstate/core';
 import { Paths } from '@/utils/constants';
 import GuestUserRHS from './GuestUserRHS';
 import LoggedInUserRHS from './LoggedInUserRHS';
 
 export default function Header() {
-  const userState = useState(userStore);
-  const userData = userState.get();
-
   return (
     <nav className='fixed top-0 w-full'>
       <Flex

@@ -20,12 +20,12 @@ export default function LoggedAuthButton() {
     <div>
       <div
         onClick={onOpen}
-        className='ml-3 w-10 md:ml-5 rounded object-contain cursor-pointer transition duration-500 hover:opacity-70'
+        className='ml-3 w-9 h-9 md:ml-5 rounded object-contain cursor-pointer transition duration-500 hover:opacity-70'
       >
         <img
           src={userData?.profile}
           alt={userData?.name}
-          className='object-cover rounded'
+          className='object-cover rounded w-full h-full'
         />
       </div>
       <HeaderModal close={onClose} isOpen={isOpen} title='Options'>
