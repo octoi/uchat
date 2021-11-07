@@ -1,5 +1,5 @@
 import { useEffect, FormEvent } from 'react';
-import { Flex, Image, useToast } from '@chakra-ui/react';
+import { Flex, useToast } from '@chakra-ui/react';
 import { useState } from '@hookstate/core';
 import { userStore } from '@/state/user.state';
 import { BeatLoader } from 'react-spinners';

@@ -11,7 +11,11 @@ import { FiCompass } from 'react-icons/fi';
 import { BiLogOut } from 'react-icons/bi';
 import { logoutUser } from '@/utils/user.utils';
 
-export default function LoggedAuthButton() {
+export default function LoggedAuthButton({
+  openJoinRoomModal,
+}: {
+  openJoinRoomModal: any;
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const userState = useState(userStore);
   const userData = userState.get();
@@ -82,6 +86,10 @@ export default function LoggedAuthButton() {
           flexDirection='row'
           justifyContent='flex-start'
           alignItems='center'
+          onClick={() => {
+            onClose();
+            openJoinRoomModal();
+          }}
         >
           <ImEnter className='mr-3' />
           Join Room
