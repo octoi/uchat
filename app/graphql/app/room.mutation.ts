@@ -13,10 +13,6 @@ export const CREATE_ROOM = gql`
       picture: $picture
       isPrivate: $isPrivate
     ) {
-      id
-      title
-      description
-      isPrivate
       roomId
     }
   }

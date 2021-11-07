@@ -6,6 +6,11 @@ export enum Paths {
   app = '/app',
   settings = '/account/settings',
   explore = '/app/explore',
-  newRoom = '/room/new',
   terms = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  newRoom = '/room/new',
+  room = `/room`,
 }
+
+export const redirectToRoom = (roomId: string): string => {
+  return `${Paths.room}/${roomId}`;
+};
