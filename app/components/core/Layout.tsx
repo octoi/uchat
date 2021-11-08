@@ -8,6 +8,7 @@ interface Props {
   title?: string;
   description?: string;
   hideDefaultHeader?: boolean;
+  needMargin?: boolean;
 }
 
 export default function Layout({
@@ -15,6 +16,7 @@ export default function Layout({
   title,
   description,
   hideDefaultHeader,
+  needMargin,
 }: Props) {
   return (
     <div>
@@ -27,6 +29,7 @@ export default function Layout({
         />
       </Head>
       {!hideDefaultHeader && <Header />}
+      {needMargin && <div className='w-full h-24'></div>}
       <AuthChecker>{children}</AuthChecker>
     </div>
   );
