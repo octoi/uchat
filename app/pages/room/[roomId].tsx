@@ -1,8 +1,11 @@
+import React, { useEffect } from 'react';
 import Layout from '@/components/core/Layout';
+import { JOIN_ROOM } from '@/graphql/room/room.mutation';
 import { GET_ROOM_DATA } from '@/graphql/room/room.query';
 import { GetRoomDataResponse } from '@/types/room.types';
 import { getApolloClient } from '@/utils/apollo';
 import { Paths } from '@/utils/constants';
+import { useMutation } from '@apollo/client';
 import { GetServerSideProps } from 'next';
 
 interface Props {
@@ -11,6 +14,12 @@ interface Props {
 }
 
 export default function RoomPage({ roomId, roomData }: Props) {
+  const [joinRoom] = useMutation(JOIN_ROOM);
+
+  useEffect(() => {
+    joinRoom({ variables: { roomId } });
+  }, []);
+
   return (
     <Layout
       title={roomData.title}

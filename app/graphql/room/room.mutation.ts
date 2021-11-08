@@ -17,3 +17,11 @@ export const CREATE_ROOM = gql`
     }
   }
 `;
+
+export const JOIN_ROOM = gql`
+  mutation ($roomId: String) {
+    joinRoom(roomId: $roomId) {
+      roomId
+    }
+  }
+`;
