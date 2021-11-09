@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { GET_ROOMS } from '@/graphql/app/app.query';
 import { RoomData } from '@/types/room.types';
-import { getApolloClient } from '@/utils/apollo';
+import { useQuery } from '@apollo/client';
 import Rooms from './Rooms';
 import SearchBanner from './SearchBanner';
-import { useQuery } from '@apollo/client';
 
 export default function ExploreRooms() {
   const [rooms, setRooms] = useState<RoomData[] | null>(null);
