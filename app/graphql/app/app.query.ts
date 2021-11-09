@@ -13,3 +13,17 @@ export const GET_ROOMS = gql`
     }
   }
 `;
+
+export const SEARCH_ROOM = gql`
+  query ($query: String) {
+    searchRoom(query: $query) {
+      title
+      description
+      picture
+      roomId
+      _count {
+        joinedUsers
+      }
+    }
+  }
+`;

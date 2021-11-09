@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { RoomData } from '@/types/room.types';
 import { ApolloError } from '@apollo/client';
+import { Paths } from '@/utils/constants';
 import Link from 'next/link';
 import styles from '@/styles/Rooms.module.css';
-import { Paths } from '@/utils/constants';
 
 interface Props {
   loading?: boolean;
@@ -13,7 +13,7 @@ interface Props {
 
 export default function Rooms({ loading, error, rooms }: Props) {
   return (
-    <div>
+    <div className='mt-7'>
       {loading && <p className='text-app-grey'>Loading ...</p>}
       {error && (
         <div>
@@ -24,6 +24,18 @@ export default function Rooms({ loading, error, rooms }: Props) {
           >
             Try reloading
           </p>
+        </div>
+      )}
+      {rooms?.length === 0 && (
+        <div>
+          <p className='text-red-400 text-xl font-medium'>
+            Seems like there is no rooms 😟
+          </p>
+          <Link href={Paths.newRoom} passHref>
+            <p className='text-app-grey text-lg mt-2 cursor-pointer hover:underline'>
+              Create Room
+            </p>
+          </Link>
         </div>
       )}
       <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
