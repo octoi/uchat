@@ -1,17 +1,18 @@
 import { gql } from '@apollo/client';
 
-export const GET_JOINED_ROOMS = gql`
+export const GET_ROOMS = gql`
   query {
-    getJoinedRooms {
-      id
-      roomId
+    getRooms {
       title
       description
       picture
       isPrivate
+      roomId
       creator {
-        id
-        email
+        name
+        profile
+      }
+      joinedUsers {
         name
         profile
       }
