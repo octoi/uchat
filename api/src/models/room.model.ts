@@ -28,6 +28,7 @@ export const getRooms = () => {
         },
         include: {
           creator: true,
+          joinedUsers: true,
         },
       })
       .then(resolve)
@@ -80,6 +81,14 @@ export const getSearchResult = (searchQuery: string) => {
               id: true,
               name: true,
               email: true,
+              profile: true,
+            },
+          },
+          joinedUsers: {
+            select: {
+              id: true,
+              email: true,
+              name: true,
               profile: true,
             },
           },
