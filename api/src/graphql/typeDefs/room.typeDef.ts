@@ -17,6 +17,7 @@ export const RoomType = new GraphQLObjectType({
     picture: { type: GraphQLString },
     isPrivate: { type: GraphQLBoolean },
     creator: { type: UserType },
+    joinedUsers: { type: GraphQLList(UserType) },
   }),
 });
 

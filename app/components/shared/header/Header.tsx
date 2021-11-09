@@ -7,7 +7,7 @@ import LoggedInUserRHS from './LoggedInUserRHS';
 
 export default function Header() {
   return (
-    <nav className='fixed top-0 w-full'>
+    <nav className='fixed z-50 top-0 w-full'>
       <Flex
         direction='row'
         justifyContent='space-between'
