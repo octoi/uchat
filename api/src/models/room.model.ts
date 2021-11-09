@@ -29,6 +29,11 @@ export const getRooms = () => {
         include: {
           creator: true,
           joinedUsers: true,
+          _count: {
+            select: {
+              joinedUsers: true,
+            },
+          },
         },
       })
       .then(resolve)
@@ -90,6 +95,11 @@ export const getSearchResult = (searchQuery: string) => {
               email: true,
               name: true,
               profile: true,
+            },
+          },
+          _count: {
+            select: {
+              joinedUsers: true,
             },
           },
         },

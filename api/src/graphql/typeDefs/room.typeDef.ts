@@ -2,6 +2,7 @@ import { UserType } from './user.typeDef';
 import {
   GraphQLBoolean,
   GraphQLID,
+  GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
   GraphQLString,
@@ -18,6 +19,14 @@ export const RoomType = new GraphQLObjectType({
     isPrivate: { type: GraphQLBoolean },
     creator: { type: UserType },
     joinedUsers: { type: GraphQLList(UserType) },
+    _count: { type: RoomTypeCount },
+  }),
+});
+
+export const RoomTypeCount = new GraphQLObjectType({
+  name: 'RoomCount',
+  fields: () => ({
+    joinedUsers: { type: GraphQLInt },
   }),
 });
 
@@ -43,5 +52,6 @@ export const RoomDataType = new GraphQLObjectType({
     isPrivate: { type: GraphQLBoolean },
     creator: { type: UserType },
     joinedUsers: { type: GraphQLList(UserType) },
+    _count: { type: RoomTypeCount },
   }),
 });

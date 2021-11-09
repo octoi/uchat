@@ -6,15 +6,9 @@ export const GET_ROOMS = gql`
       title
       description
       picture
-      isPrivate
       roomId
-      creator {
-        name
-        profile
-      }
-      joinedUsers {
-        name
-        profile
+      _count {
+        joinedUsers
       }
     }
   }

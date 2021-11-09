@@ -13,4 +13,7 @@ export interface RoomData {
     name: string;
     profile: string;
   };
+  _count?: {
+    joinedUsers: number;
+  };
 }

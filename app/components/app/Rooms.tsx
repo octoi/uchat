@@ -59,6 +59,10 @@ export default function Rooms({ loading, error, rooms }: Props) {
                     {room.description.slice(0, 250)}
                     {room.description.length > 250 && ' ...'}
                   </p>
+                  <p className='mt-5 font-medium text-lg text-app-purpleLight flex items-center'>
+                    <div className='h-1 w-1 p-2 rounded-full bg-app-purpleLight mr-2'></div>{' '}
+                    {room._count?.joinedUsers} Online
+                  </p>
                 </div>
               </div>
             </Link>
