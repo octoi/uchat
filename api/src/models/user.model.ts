@@ -138,11 +138,18 @@ export const getJoinedRooms = (userId: number) => {
               title: true,
               description: true,
               isPrivate: true,
+              picture: true,
               creator: {
                 select: {
                   id: true,
                   name: true,
                   email: true,
+                  profile: true,
+                },
+              },
+              joinedUsers: {
+                select: {
+                  name: true,
                   profile: true,
                 },
               },
