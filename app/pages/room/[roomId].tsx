@@ -7,6 +7,7 @@ import { getApolloClient } from '@/utils/apollo';
 import { Paths } from '@/utils/constants';
 import { useMutation } from '@apollo/client';
 import { GetServerSideProps } from 'next';
+import RoomPageContent from '@/components/room/RoomPageContent';
 
 interface Props {
   roomId: string;
@@ -26,7 +27,7 @@ export default function RoomPage({ roomId, roomData }: Props) {
       description={roomData.description}
       needMargin
     >
-      <h2>{roomId}</h2>
+      <RoomPageContent roomData={roomData} />
     </Layout>
   );
 }
@@ -40,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     variables: { roomId },
   });
 
-  const roomData = responseData?.data?.getRoomData;
+  const roomData = responseData?.data?.getRoom;
 
   if (!roomData) {
     return {

@@ -61,7 +61,32 @@ export const deleteRoom = (roomId: string, userId: string) => {
 export const getRoom = (roomId: string) => {
   return new Promise((resolve, reject) => {
     prismaClient.room
-      .findUnique({ where: { roomId } })
+      .findUnique({
+        where: { roomId },
+        include: {
+          creator: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profile: true,
+            },
+          },
+          joinedUsers: {
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              profile: true,
+            },
+          },
+          _count: {
+            select: {
+              joinedUsers: true,
+            },
+          },
+        },
+      })
       .then(resolve)
       .catch(() => reject(`Failed to find room with id ${roomId}`));
   });
