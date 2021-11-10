@@ -13,6 +13,8 @@ interface Props {
   isOpen: boolean;
   children?: React.ReactNode;
   title?: string;
+  size?: string;
+  scrollBehavior?: 'inside' | 'outside';
 }
 
 export default function HeaderModal({
@@ -20,9 +22,17 @@ export default function HeaderModal({
   isOpen,
   children,
   title,
+  size,
+  scrollBehavior,
 }: Props) {
   return (
-    <Modal onClose={onClose} isOpen={isOpen} isCentered>
+    <Modal
+      onClose={onClose}
+      isOpen={isOpen}
+      isCentered
+      size={size}
+      scrollBehavior={scrollBehavior}
+    >
       <ModalOverlay />
       <ModalContent mx={2} background='var(--darker)'>
         {title && <ModalHeader>{title}</ModalHeader>}
