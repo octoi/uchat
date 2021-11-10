@@ -7,12 +7,14 @@ export interface RoomData {
   roomId: string;
   creator?: {
     name: string;
+    email: string;
     profile: string;
   };
   joinedUsers?: {
     name: string;
+    email: string;
     profile: string;
-  };
+  }[];
   _count?: {
     joinedUsers: number;
   };

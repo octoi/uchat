@@ -10,10 +10,12 @@ export const GET_ROOM_DATA = gql`
       roomId
       creator {
         name
+        email
         profile
       }
       joinedUsers {
         name
+        email
         profile
       }
       _count {
