@@ -5,20 +5,29 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { MdContentCopy } from 'react-icons/md';
 import { BiShareAlt } from 'react-icons/bi';
 import { AiOutlineCrown } from 'react-icons/ai';
+import { useState } from '@hookstate/core';
+import { userStore } from '@/state/user.state';
 import HeaderModal from '../shared/header/HeaderModal';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import RoomSettings from './RoomSettings';
 
 export default function RoomInfo({ roomData }: { roomData: RoomData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
+  const loggedInUserData = useState(userStore);
+  const isHost = roomData.creator?.email === loggedInUserData.get()?.email;
+
   return (
     <div>
-      <img
-        src={roomData.picture}
-        alt={roomData.title}
-        className='h-40 w-full object-cover'
-      />
+      <div className='relative h-40 w-full'>
+        <img
+          src={roomData.picture}
+          alt={roomData.title}
+          className='h-40 w-full object-cover'
+        />
+        <RoomSettings roomData={roomData} isHost={isHost} />
+      </div>
       <div className='p-5 rounded flex items-center justify-between'>
         <h1 className='font-medium text-xl text-app-white'>
           {roomData.title.slice(0, 23) +
