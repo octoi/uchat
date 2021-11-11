@@ -1,19 +1,27 @@
+import { useRouter } from 'next/router';
 import { IoMdSettings } from 'react-icons/io';
-import { Button, Divider, useDisclosure } from '@chakra-ui/react';
+import { Button, Divider, useDisclosure, useToast } from '@chakra-ui/react';
 import { RoomData } from '@/types/room.types';
 import HeaderModal from '../shared/header/HeaderModal';
 import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineClear } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
+import { useMutation } from '@apollo/client';
+import { LEAVE_ROOM } from '@/graphql/room/room.mutation';
+import { Paths } from '@/utils/constants';
 
 export default function RoomSettings({
-  roomData,
+  roomId,
   isHost,
 }: {
-  roomData: RoomData;
+  roomId: string;
   isHost: boolean;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+  const toast = useToast();
+
+  const [leaveRoom] = useMutation(LEAVE_ROOM);
 
   return (
     <div>
@@ -57,6 +65,22 @@ export default function RoomSettings({
           flexDirection='row'
           justifyContent='flex-start'
           alignItems='center'
+          onClick={() => {
+            leaveRoom({ variables: { roomId } })
+              .then(() => {
+                router.push(Paths.app);
+              })
+              .catch((err) => {
+                console.log(err);
+                toast({
+                  title: 'Failed to leave room',
+                  status: 'error',
+                  position: 'top-right',
+                  duration: 3000,
+                  isClosable: true,
+                });
+              });
+          }}
         >
           <BiLogOut className='mr-2' size='21' />
           Leave Room

@@ -26,7 +26,7 @@ export default function RoomInfo({ roomData }: { roomData: RoomData }) {
           alt={roomData.title}
           className='h-40 w-full object-cover'
         />
-        <RoomSettings roomData={roomData} isHost={isHost} />
+        <RoomSettings roomId={roomData.roomId} isHost={isHost} />
       </div>
       <div className='p-5 rounded flex items-center justify-between'>
         <h1 className='font-medium text-xl text-app-white'>
