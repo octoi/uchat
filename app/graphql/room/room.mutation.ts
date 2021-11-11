@@ -25,3 +25,9 @@ export const JOIN_ROOM = gql`
     }
   }
 `;
+
+export const LEAVE_ROOM = gql`
+  mutation ($roomId: String) {
+    leaveRoom(roomId: $roomId)
+  }
+`;
