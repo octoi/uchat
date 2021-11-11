@@ -31,3 +31,9 @@ export const LEAVE_ROOM = gql`
     leaveRoom(roomId: $roomId)
   }
 `;
+
+export const DELETE_ROOM = gql`
+  mutation ($roomId: String) {
+    deleteRoom(roomId: $roomId)
+  }
+`;

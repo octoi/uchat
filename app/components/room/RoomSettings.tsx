@@ -7,7 +7,7 @@ import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineClear } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { useMutation } from '@apollo/client';
-import { LEAVE_ROOM } from '@/graphql/room/room.mutation';
+import { DELETE_ROOM, LEAVE_ROOM } from '@/graphql/room/room.mutation';
 import { Paths } from '@/utils/constants';
 
 export default function RoomSettings({
@@ -22,6 +22,7 @@ export default function RoomSettings({
   const toast = useToast();
 
   const [leaveRoom] = useMutation(LEAVE_ROOM);
+  const [deleteRoom] = useMutation(DELETE_ROOM);
 
   return (
     <div>
@@ -113,6 +114,22 @@ export default function RoomSettings({
               flexDirection='row'
               justifyContent='flex-start'
               alignItems='center'
+              onClick={() => {
+                deleteRoom({ variables: { roomId } })
+                  .then(() => {
+                    router.push(Paths.app);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    toast({
+                      title: 'Failed to delete room',
+                      status: 'error',
+                      position: 'top-right',
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                  });
+              }}
             >
               <HiOutlineTrash className='mr-2' size='21' />
               Delete Room
