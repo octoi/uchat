@@ -5,7 +5,7 @@ export interface RoomData {
   picture: string;
   isPrivate: boolean;
   roomId: string;
-  creator?: {
+  creator: {
     name: string;
     email: string;
     profile: string;

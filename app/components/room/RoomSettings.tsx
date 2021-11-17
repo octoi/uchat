@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
 import { IoMdSettings } from 'react-icons/io';
 import { Button, Divider, useDisclosure, useToast } from '@chakra-ui/react';
-import { RoomData } from '@/types/room.types';
-import HeaderModal from '../shared/header/HeaderModal';
 import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineClear } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { useMutation } from '@apollo/client';
 import { DELETE_ROOM, LEAVE_ROOM } from '@/graphql/room/room.mutation';
 import { Paths } from '@/utils/constants';
+import HeaderModal from '../shared/header/HeaderModal';
 
 export default function RoomSettings({
   roomId,
@@ -36,7 +35,7 @@ export default function RoomSettings({
       </div>
 
       <HeaderModal
-        title='Edit Room'
+        title='Settings'
         close={onClose}
         isOpen={isOpen}
         scrollBehavior='inside'

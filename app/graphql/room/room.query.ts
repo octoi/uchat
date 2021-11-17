@@ -13,13 +13,20 @@ export const GET_ROOM_DATA = gql`
         email
         profile
       }
+      _count {
+        joinedUsers
+      }
+    }
+  }
+`;
+
+export const GET_ROOM_USERS = gql`
+  query ($roomId: String) {
+    getRoomData(roomId: $roomId) {
       joinedUsers {
         name
         email
         profile
-      }
-      _count {
-        joinedUsers
       }
     }
   }
