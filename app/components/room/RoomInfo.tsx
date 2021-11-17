@@ -4,12 +4,12 @@ import { Image, useDisclosure, useToast } from '@chakra-ui/react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { MdContentCopy } from 'react-icons/md';
 import { BiShareAlt } from 'react-icons/bi';
-import { AiOutlineCrown } from 'react-icons/ai';
 import { useState } from '@hookstate/core';
 import { userStore } from '@/state/user.state';
 import HeaderModal from '../shared/header/HeaderModal';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import RoomSettings from './RoomSettings';
+import JoinedUsers from './JoinedUsers';
 
 export default function RoomInfo({ roomData }: { roomData: RoomData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -93,24 +93,7 @@ export default function RoomInfo({ roomData }: { roomData: RoomData }) {
         </button>
       </HeaderModal>
       <div className='px-5 pb-5 mt-2'>
-        <h2 className='text-lg text-app-grey mb-3'>
-          Members ({roomData._count?.joinedUsers})
-        </h2>
-        {roomData.joinedUsers?.map((user, idx) => (
-          <div key={idx} className='mt-3 flex items-center'>
-            <img
-              src={user.profile}
-              alt={user.name}
-              className='rounded-full w-10 h-10 object-cover'
-            />
-            <div className='ml-3 flex items-center'>
-              <h2>{user.name}</h2>
-              {user.email === roomData.creator?.email && (
-                <AiOutlineCrown className='ml-1' strokeWidth={20} size={20} />
-              )}
-            </div>
-          </div>
-        ))}
+        <JoinedUsers roomId={roomData.roomId} creator={roomData.creator} />
       </div>
     </div>
   );
