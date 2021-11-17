@@ -33,3 +33,12 @@ body {
   border-radius: 10px;
   background: var(--dark);
 }
+
+/* app styles */
+.chat-section {
+  height: calc(100vh - 130px);
+}
+
+.chat-section-chat-container {
+  height: calc(100% - 41px);
+}
