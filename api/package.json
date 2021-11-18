@@ -33,6 +33,7 @@
     "express": "^4.17.1",
     "graphql": "^15.6.1",
     "jsonwebtoken": "^8.5.1",
-    "short-unique-id": "^4.4.4"
+    "short-unique-id": "^4.4.4",
+    "socket.io": "^4.4.0"
   }
 }
