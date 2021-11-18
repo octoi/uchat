@@ -1,4 +1,5 @@
 export const GRAPHQL_ENDPOINT = 'http://localhost:5000/api';
+export const SOCKET_SERVER = 'http://localhost:5000';
 
 export enum Paths {
   register = '/account/register',
