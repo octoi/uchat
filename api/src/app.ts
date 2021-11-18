@@ -1,8 +1,11 @@
+import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import { log } from './utils/log';
 import { schema } from './graphql';
 import { ApolloServer } from 'apollo-server-express';
+import { Server as SocketServer } from 'socket.io';
+import { handleSocketIoConnection } from './socketio';
 
 const main = async () => {
   const app = express();
@@ -15,6 +18,10 @@ const main = async () => {
   await server.start();
 
   server.applyMiddleware({ app, path: '/api' });
+
+  // socket io
+  const io = new SocketServer(http.createServer(app));
+  handleSocketIoConnection(io);
 
   // start server
   const port = process.env.PORT || 5000;
