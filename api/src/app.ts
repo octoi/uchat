@@ -9,6 +9,7 @@ import { handleSocketIoConnection } from './socketio';
 
 const main = async () => {
   const app = express();
+  const httpServer = http.createServer(app);
 
   // apply middlewares
   app.use(cors());
@@ -20,12 +21,13 @@ const main = async () => {
   server.applyMiddleware({ app, path: '/api' });
 
   // socket io
-  const io = new SocketServer(http.createServer(app));
+  const io = new SocketServer(httpServer);
+  io.listen(httpServer, { cors: { origin: '*' } });
   handleSocketIoConnection(io);
 
   // start server
   const port = process.env.PORT || 5000;
-  app.listen(port, () => {
+  httpServer.listen(port, () => {
     log.success(`🚀 SERVER STARTED ON PORT ${port}`);
     log.info(`SERVER : http://localhost:${port}`);
     log.info(`GRAPHQL: http://localhost:${port}${server.graphqlPath}`);

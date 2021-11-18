@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Layout from '@/components/core/Layout';
 import { JOIN_ROOM } from '@/graphql/room/room.mutation';
 import { GET_ROOM_DATA } from '@/graphql/room/room.query';
 import { RoomData } from '@/types/room.types';
@@ -7,6 +6,8 @@ import { getApolloClient } from '@/utils/apollo';
 import { Paths } from '@/utils/constants';
 import { useMutation } from '@apollo/client';
 import { GetServerSideProps } from 'next';
+import { connectSocketClientToServer } from 'socketio';
+import Layout from '@/components/core/Layout';
 import RoomPageContent from '@/components/room/RoomPageContent';
 
 interface Props {
@@ -18,6 +19,7 @@ export default function RoomPage({ roomId, roomData }: Props) {
   const [joinRoom] = useMutation(JOIN_ROOM);
 
   useEffect(() => {
+    connectSocketClientToServer();
     joinRoom({ variables: { roomId } });
   }, []);
 
