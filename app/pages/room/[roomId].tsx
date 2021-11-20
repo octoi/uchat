@@ -19,9 +19,9 @@ export default function RoomPage({ roomId, roomData }: Props) {
   const [joinRoom] = useMutation(JOIN_ROOM);
 
   useEffect(() => {
-    connectSocketClientToServer();
+    connectSocketClientToServer(roomId);
     joinRoom({ variables: { roomId } });
-  }, []);
+  }, [roomId, joinRoom]);
 
   return (
     <Layout
