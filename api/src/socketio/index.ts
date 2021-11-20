@@ -1,15 +1,30 @@
-import { Server as SocketServer, Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { Server as SocketServer } from 'socket.io';
+import { AppSocket, Events } from './types';
 import { log } from '../utils/log';
-import { Events } from './types';
+import { botMessage } from './utils';
 
-export const handleSocketIoConnection = (
-  io: SocketServer<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>
-) => {
-  io.on(Events.Connection, (socket: Socket) => {
+export const handleSocketIoConnection = (io: SocketServer) => {
+  io.on(Events.Connection, (socket: AppSocket) => {
     log.info(`client connected ${socket.id}`);
-    socket.on(Events.Disconnect, () => {
+
+    socket.on('joinRoom', (data) => {
+      // TODO: save user data to redis db
+      console.log(data);
+      socket.join(data.roomId);
+      socket.broadcast.emit(
+        'message',
+        botMessage(`${data.sender.name} has joined the gang`)
+      );
+      socket.emit(
+        'message',
+        botMessage(`Welcome ${data.sender.name} to ${data.roomId}`)
+      );
+    });
+
+    // handle disconnect
+    socket.on('disconnect', () => {
       log.error(`${socket.id} disconnected`);
+      // TODO: leave user from room
     });
   });
 };
