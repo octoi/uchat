@@ -1,4 +1,4 @@
-import { socketState } from '@/state/socket.state';
+import { socketStore } from '@/state/socket.state';
 import { userStore } from '@/state/user.state';
 import { SOCKET_SERVER } from '@/utils/constants';
 import io from 'socket.io-client';
@@ -9,7 +9,7 @@ export const connectSocketClientToServer = (roomId: string, setSocket: any) => {
   const socketIo = io(socketServerURL);
   const user = userStore.get();
 
-  socketState.set(socketIo);
+  socketStore.set(socketIo);
   if (!user) return;
   socketIo.emit('joinRoom', {
     sender: {
