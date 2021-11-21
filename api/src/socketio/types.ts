@@ -9,7 +9,17 @@ export enum Events {
 
 // event list
 
-interface MessageSender {
+export interface ServerToClientEvents {
+  message: (message: Message) => void;
+}
+
+export interface ClientToServerEvents {
+  message: (message: Message) => void;
+  joinRoom: (data: JoinRoom) => void;
+}
+
+// types
+export interface MessageSender {
   name: string;
   profile?: string;
   email?: string;
@@ -21,16 +31,7 @@ export interface Message {
   message: any;
 }
 
-interface JoinRoom {
+export interface JoinRoom {
   sender: MessageSender;
   roomId: string;
-}
-
-export interface ServerToClientEvents {
-  message: (message: Message) => void;
-}
-
-export interface ClientToServerEvents {
-  message: (message: Message) => void;
-  joinRoom: (data: JoinRoom) => void;
 }

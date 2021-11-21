@@ -6,8 +6,8 @@ import { userStore } from '@/state/user.state';
 
 export default function MessageBox({ roomId }: { roomId: string }) {
   const messageState = useState('');
-  const socket = socketStore.attach(Downgraded).get();
   const user = userStore.get();
+  const socket = socketStore.attach(Downgraded).get();
 
   const send = (message: string) => {
     if (!socket || !user) return;
@@ -23,6 +23,7 @@ export default function MessageBox({ roomId }: { roomId: string }) {
 
   const sendMessage = (message: string) => {
     if (!message.trim()) return;
+    messageState.set('');
     send(message);
   };
 
@@ -39,7 +40,6 @@ export default function MessageBox({ roomId }: { roomId: string }) {
         onKeyUp={(e) => {
           if (e.keyCode === 13) {
             let message = messageState.get();
-            messageState.set('');
             sendMessage(message);
           }
         }}

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Socket } from 'socket.io-client';
+import React, { useEffect } from 'react';
 import { JOIN_ROOM } from '@/graphql/room/room.mutation';
 import { GET_ROOM_DATA } from '@/graphql/room/room.query';
 import { RoomData } from '@/types/room.types';
@@ -18,10 +17,9 @@ interface Props {
 
 export default function RoomPage({ roomId, roomData }: Props) {
   const [joinRoom] = useMutation(JOIN_ROOM);
-  const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    connectSocketClientToServer(roomId, setSocket);
+    connectSocketClientToServer(roomId);
     joinRoom({ variables: { roomId } });
   }, [roomId, joinRoom]);
 
@@ -31,7 +29,7 @@ export default function RoomPage({ roomId, roomData }: Props) {
       description={roomData.description}
       needMargin
     >
-      <RoomPageContent roomData={roomData} socket={socket} />
+      <RoomPageContent roomData={roomData} />
     </Layout>
   );
 }
