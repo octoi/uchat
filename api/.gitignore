@@ -119,3 +119,6 @@ dist
 
 # prisma
 migrations
+
+# lock
+*.lock
