@@ -1,17 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import { RoomData } from '@/types/room.types';
 import { Flex, useDisclosure } from '@chakra-ui/react';
+import { Socket } from 'socket.io-client';
 import HeaderModal from '../shared/header/HeaderModal';
 import ChatSection from './chatSection';
 import RoomInfo from './RoomInfo';
 
-export default function RoomPageContent({ roomData }: { roomData: RoomData }) {
+interface Props {
+  roomData: RoomData;
+  socket: Socket | null;
+}
+
+export default function RoomPageContent({ roomData, socket }: Props) {
   const { onClose, onOpen, isOpen } = useDisclosure();
 
   return (
     <Flex direction='row' p={2}>
       <div className='chat-section w-full bg-app-darker p-5 rounded'>
-        <ChatSection roomId={roomData.roomId} onOpen={onOpen} />
+        <ChatSection roomId={roomData.roomId} onOpen={onOpen} socket={socket} />
       </div>
 
       <div className='hidden ml-2 xl:block bg-app-dark rounded w-1/4 h-full'>
