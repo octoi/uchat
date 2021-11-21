@@ -21,6 +21,11 @@ export const handleSocketIoConnection = (io: SocketServer) => {
       );
     });
 
+    socket.on('message', (data) => {
+      socket.broadcast.emit('message', data);
+      socket.emit('message', data);
+    });
+
     // handle disconnect
     socket.on('disconnect', () => {
       log.error(`${socket.id} disconnected`);

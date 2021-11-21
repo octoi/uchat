@@ -1,13 +1,29 @@
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { AiOutlineSend } from 'react-icons/ai';
-import { useState } from '@hookstate/core';
+import { Downgraded, useState } from '@hookstate/core';
+import { socketStore } from '@/state/socket.state';
+import { userStore } from '@/state/user.state';
 
 export default function MessageBox({ roomId }: { roomId: string }) {
   const messageState = useState('');
+  const socket = socketStore.attach(Downgraded).get();
+  const user = userStore.get();
+
+  const send = (message: string) => {
+    if (!socket || !user) return;
+    socket.emit('message', {
+      message,
+      sender: {
+        name: user.name,
+        profile: user.profile,
+        email: user.email,
+      },
+    });
+  };
 
   const sendMessage = (message: string) => {
     if (!message.trim()) return;
-    // TODO: send message to server
+    send(message);
   };
 
   return (
