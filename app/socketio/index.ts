@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 const socketServerURL = process.env.SOCKET_SERVER || SOCKET_SERVER;
 
-export const connectSocketClientToServer = (roomId: string, setSocket: any) => {
+export const connectSocketClientToServer = (roomId: string) => {
   const socketIo = io(socketServerURL);
   const user = userStore.get();
 
@@ -17,6 +17,4 @@ export const connectSocketClientToServer = (roomId: string, setSocket: any) => {
     },
     roomId,
   });
-
-  setSocket(socketIo);
 };

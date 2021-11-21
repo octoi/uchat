@@ -1,23 +1,11 @@
 import { Message } from '@/types/socketio.types';
 import { useState, useEffect } from 'react';
-import { Socket } from 'socket.io-client';
-import { Downgraded, useState as useHookState } from '@hookstate/core';
 import { socketStore } from '@/state/socket.state';
+import { Downgraded } from '@hookstate/core';
 
-export default function Chats({}: { socket: Socket | null }) {
+export default function Chats() {
   const [messages, setMessages] = useState<Message[]>([]);
-
-  const socketState = useHookState(socketStore);
-
-  // useEffect(() => {
-  //   if (!socket) return;
-  //   console.log('hello world');
-
-  //   socket.on('message', (message) => {
-  //     setMessages([...messages, message]);
-  //   });
-  // }, [messages]);
-  const socket = socketState.attach(Downgraded).get();
+  const socket = socketStore.attach(Downgraded).get();
 
   useEffect(() => {
     if (!socket) return;

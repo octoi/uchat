@@ -1,16 +1,14 @@
-import { Socket } from 'socket.io-client';
 import Chats from './Chats';
 import MessageBox from './MessageBox';
 
 interface Props {
   roomId: string;
-  socket: Socket | null;
 }
 
-export default function ChatContainer({ roomId, socket }: Props) {
+export default function ChatContainer({ roomId }: Props) {
   return (
     <div className='chat-section-chat-container relative'>
-      <Chats socket={socket} />
+      <Chats />
       <MessageBox roomId={roomId} />
     </div>
   );
