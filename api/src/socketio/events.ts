@@ -38,3 +38,7 @@ export const leaveRoom = (socket: AppSocket) => {
 export const clearChat = (io: SocketServer, data: ClearChat) => {
   io.to(data.roomId).emit('clearChat');
 };
+
+export const deleteRoom = (socket: AppSocket) => {
+  socket.broadcast.emit('leaveRoom', 'Host deleted this room');
+};
