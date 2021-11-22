@@ -4,11 +4,13 @@ export type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 
 interface ServerToClientEvents {
   message: (message: Message) => void;
+  clearChat: () => void;
 }
 
 interface ClientToServerEvents {
   message: (message: Message) => void;
   joinRoom: (data: JoinRoom) => void;
+  clearChat: (data: ClearChat) => void;
 }
 
 interface MessageSender {
@@ -28,5 +30,9 @@ interface JoinRoom {
     name: string;
     userId: number;
   };
+  roomId: string;
+}
+
+interface ClearChat {
   roomId: string;
 }

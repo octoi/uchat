@@ -7,8 +7,9 @@ import { AiOutlineClear } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { DELETE_ROOM, LEAVE_ROOM } from '@/graphql/room/room.mutation';
 import { Paths } from '@/utils/constants';
-import HeaderModal from '../shared/header/HeaderModal';
 import { clearMessages } from '@/state/message.state';
+import { clearChatForAll } from 'socketio';
+import HeaderModal from '../shared/header/HeaderModal';
 
 export default function RoomSettings({
   roomId,
@@ -100,6 +101,7 @@ export default function RoomSettings({
               flexDirection='row'
               justifyContent='flex-start'
               alignItems='center'
+              onClick={() => clearChatForAll(roomId)}
             >
               <AiOutlineClear className='mr-2' size='21' />
               Clear For All

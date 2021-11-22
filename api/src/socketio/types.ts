@@ -11,11 +11,13 @@ export enum Events {
 
 export interface ServerToClientEvents {
   message: (message: Message) => void;
+  clearChat: () => void;
 }
 
 export interface ClientToServerEvents {
   message: (message: Message) => void;
   joinRoom: (data: JoinRoom) => void;
+  clearChat: (data: ClearChat) => void;
 }
 
 // types
@@ -36,5 +38,9 @@ export interface JoinRoom {
     name: string;
     userId: number;
   };
+  roomId: string;
+}
+
+export interface ClearChat {
   roomId: string;
 }

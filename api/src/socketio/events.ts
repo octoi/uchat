@@ -1,6 +1,7 @@
+import { Server as SocketServer } from 'socket.io';
 import { leaveRoomController } from '../controllers/room.controller';
 import { log } from '../utils/log';
-import { AppSocket, JoinRoom, Message } from './types';
+import { AppSocket, ClearChat, JoinRoom, Message } from './types';
 import { botMessage } from './utils';
 import {
   getAndDeleteDataController,
@@ -32,4 +33,8 @@ export const leaveRoom = (socket: AppSocket) => {
   getAndDeleteDataController(socket.id).then(({ roomId, userId }) => {
     leaveRoomController(roomId, userId);
   });
+};
+
+export const clearChat = (io: SocketServer, data: ClearChat) => {
+  io.to(data.roomId).emit('clearChat');
 };
