@@ -1,10 +1,17 @@
+import { leaveRoomController } from '../controllers/room.controller';
 import { log } from '../utils/log';
 import { AppSocket, JoinRoom, Message } from './types';
 import { botMessage } from './utils';
+import {
+  getAndDeleteDataController,
+  saveUserDataController,
+} from '../controllers/redis.controller';
 
 export const joinRoom = (socket: AppSocket, data: JoinRoom) => {
-  // TODO: save user data to redis db
+  saveUserDataController(socket.id, data.roomId, data.sender.userId);
+
   socket.join(data.roomId);
+
   socket.broadcast.emit(
     'message',
     botMessage(`${data.sender.name} has joined the gang`)
@@ -22,5 +29,7 @@ export const message = (socket: AppSocket, data: Message) => {
 
 export const leaveRoom = (socket: AppSocket) => {
   log.error(`${socket.id} disconnected`);
-  // TODO: leave user from room
+  getAndDeleteDataController(socket.id).then(({ roomId, userId }) => {
+    leaveRoomController(roomId, userId);
+  });
 };

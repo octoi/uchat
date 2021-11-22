@@ -1,12 +1,13 @@
 import { socketStore } from '@/state/socket.state';
 import { userStore } from '@/state/user.state';
+import { AppSocket } from '@/types/socket.types';
 import { SOCKET_SERVER } from '@/utils/constants';
 import io from 'socket.io-client';
 
 const socketServerURL = process.env.SOCKET_SERVER || SOCKET_SERVER;
 
 export const connectSocketClientToServer = (roomId: string) => {
-  const socketIo = io(socketServerURL);
+  const socketIo: AppSocket = io(socketServerURL);
   const user = userStore.get();
 
   socketStore.set(socketIo);
@@ -14,6 +15,7 @@ export const connectSocketClientToServer = (roomId: string) => {
   socketIo.emit('joinRoom', {
     sender: {
       name: user.name,
+      userId: parseInt(user.id),
     },
     roomId,
   });

@@ -32,6 +32,9 @@ export interface Message {
 }
 
 export interface JoinRoom {
-  sender: MessageSender;
+  sender: {
+    name: string;
+    userId: number;
+  };
   roomId: string;
 }
