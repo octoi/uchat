@@ -9,6 +9,8 @@ import { GetServerSideProps } from 'next';
 import { connectSocketClientToServer } from 'socketio';
 import Layout from '@/components/core/Layout';
 import RoomPageContent from '@/components/room/RoomPageContent';
+import { socketStore } from '@/state/socket.state';
+import { Downgraded } from '@hookstate/core';
 
 interface Props {
   roomId: string;
@@ -21,6 +23,10 @@ export default function RoomPage({ roomId, roomData }: Props) {
   useEffect(() => {
     connectSocketClientToServer(roomId);
     joinRoom({ variables: { roomId } });
+
+    return () => {
+      socketStore.attach(Downgraded).get()?.disconnect();
+    };
   }, [roomId, joinRoom]);
 
   return (

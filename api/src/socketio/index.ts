@@ -11,6 +11,6 @@ export const handleSocketIoConnection = (io: SocketServer) => {
 
     socket.on('message', (data) => message(socket, data));
 
-    socket.on('disconnect', () => leaveRoom);
+    socket.on('disconnect', () => leaveRoom(socket));
   });
 };

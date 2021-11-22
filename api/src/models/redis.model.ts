@@ -1,7 +1,7 @@
 import { client } from '../redis';
 
 // { "socketID": { roomId: "some room Id", userId: "user id" } }
-export const setData = (socketId: string, roomId: string, userId: string) => {
+export const setData = (socketId: string, roomId: string, userId: number) => {
   return new Promise((resolve, reject) => {
     client.set(socketId, JSON.stringify({ roomId, userId }), (err, reply) => {
       if (reply) resolve(reply);
