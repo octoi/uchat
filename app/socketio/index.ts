@@ -20,6 +20,8 @@ export const connectSocketClientToServer = (roomId: string) => {
     },
     roomId,
   });
+
+  return socketIo;
 };
 
 export const clearChatForAll = (roomId: string) => {
@@ -27,4 +29,11 @@ export const clearChatForAll = (roomId: string) => {
 
   if (!socketIo) return;
   socketIo.emit('clearChat', { roomId });
+};
+
+export const emitDeleteRoom = () => {
+  const socketIo = socketStore.attach(Downgraded).get();
+
+  if (!socketIo) return;
+  socketIo.emit('deleteRoom');
 };

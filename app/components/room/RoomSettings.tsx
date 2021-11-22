@@ -8,7 +8,7 @@ import { HiOutlineTrash } from 'react-icons/hi';
 import { DELETE_ROOM, LEAVE_ROOM } from '@/graphql/room/room.mutation';
 import { Paths } from '@/utils/constants';
 import { clearMessages } from '@/state/message.state';
-import { clearChatForAll } from 'socketio';
+import { clearChatForAll, emitDeleteRoom } from 'socketio';
 import HeaderModal from '../shared/header/HeaderModal';
 
 export default function RoomSettings({
@@ -120,6 +120,7 @@ export default function RoomSettings({
               onClick={() => {
                 deleteRoom({ variables: { roomId } })
                   .then(() => {
+                    emitDeleteRoom();
                     router.push(Paths.app);
                   })
                   .catch((err) => {

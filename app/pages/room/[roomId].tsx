@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { JOIN_ROOM } from '@/graphql/room/room.mutation';
 import { GET_ROOM_DATA } from '@/graphql/room/room.query';
 import { RoomData } from '@/types/room.types';
@@ -9,7 +10,7 @@ import { GetServerSideProps } from 'next';
 import { connectSocketClientToServer } from 'socketio';
 import { socketStore } from '@/state/socket.state';
 import { Downgraded } from '@hookstate/core';
-import Head from 'next/head';
+import { clearMessages } from '@/state/message.state';
 import Layout from '@/components/core/Layout';
 import RoomPageContent from '@/components/room/RoomPageContent';
 
@@ -20,15 +21,23 @@ interface Props {
 
 export default function RoomPage({ roomId, roomData }: Props) {
   const [joinRoom] = useMutation(JOIN_ROOM);
+  const router = useRouter();
 
   useEffect(() => {
-    connectSocketClientToServer(roomId);
+    clearMessages();
+
+    const socket = connectSocketClientToServer(roomId);
     joinRoom({ variables: { roomId } });
+
+    socket?.on('leaveRoom', (msg) => {
+      alert(msg);
+      router.push(Paths.app);
+    });
 
     return () => {
       socketStore.attach(Downgraded).get()?.disconnect();
     };
-  }, [roomId, joinRoom]);
+  }, [roomId, joinRoom, router]);
 
   return (
     <Layout
