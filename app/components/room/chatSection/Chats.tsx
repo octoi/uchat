@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Message } from '@/types/socket.types';
 import { socketStore } from '@/state/socket.state';
 import { Downgraded } from '@hookstate/core';
-import { messageStore } from '@/state/message.state';
+import { messageStore, clearMessages } from '@/state/message.state';
 import { useState } from '@hookstate/core';
 
 export default function Chats() {
@@ -18,6 +18,8 @@ export default function Chats() {
     socket.on('message', (message) => {
       messages.attach(Downgraded).set([...allMessages, message]);
     });
+
+    socket.on('clearChat', clearMessages);
   }, [socket, allMessages, messages]);
 
   return (

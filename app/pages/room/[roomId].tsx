@@ -7,10 +7,11 @@ import { Paths } from '@/utils/constants';
 import { useMutation } from '@apollo/client';
 import { GetServerSideProps } from 'next';
 import { connectSocketClientToServer } from 'socketio';
-import Layout from '@/components/core/Layout';
-import RoomPageContent from '@/components/room/RoomPageContent';
 import { socketStore } from '@/state/socket.state';
 import { Downgraded } from '@hookstate/core';
+import Head from 'next/head';
+import Layout from '@/components/core/Layout';
+import RoomPageContent from '@/components/room/RoomPageContent';
 
 interface Props {
   roomId: string;
@@ -33,6 +34,7 @@ export default function RoomPage({ roomId, roomData }: Props) {
     <Layout
       title={roomData.title}
       description={roomData.description}
+      image={roomData.picture}
       needMargin
     >
       <RoomPageContent roomData={roomData} />
