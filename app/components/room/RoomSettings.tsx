@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router';
 import { IoMdSettings } from 'react-icons/io';
 import { Button, Divider, useDisclosure, useToast } from '@chakra-ui/react';
+import { useMutation } from '@apollo/client';
 import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineClear } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
-import { useMutation } from '@apollo/client';
 import { DELETE_ROOM, LEAVE_ROOM } from '@/graphql/room/room.mutation';
 import { Paths } from '@/utils/constants';
 import HeaderModal from '../shared/header/HeaderModal';
+import { clearMessages } from '@/state/message.state';
 
 export default function RoomSettings({
   roomId,
@@ -50,6 +51,7 @@ export default function RoomSettings({
           flexDirection='row'
           justifyContent='flex-start'
           alignItems='center'
+          onClick={clearMessages}
         >
           <AiOutlineClear className='mr-2' size='21' />
           Clear Chat

@@ -6,7 +6,7 @@ export const botMessage = (message: string): Message => {
     sender: {
       name: 'Ubot',
       isBot: true,
-      profile: '/logo.svg',
+      profile: '/favicon.svg',
     },
   };
 };

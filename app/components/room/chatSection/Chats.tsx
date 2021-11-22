@@ -1,24 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Message } from '@/types/socket.types';
 import { socketStore } from '@/state/socket.state';
 import { Downgraded } from '@hookstate/core';
+import { messageStore } from '@/state/message.state';
+import { useState } from '@hookstate/core';
 
 export default function Chats() {
-  const [messages, setMessages] = useState<Message[]>([]);
   const socket = socketStore.attach(Downgraded).get();
+  const messages = useState(messageStore);
+
+  const allMessages = messages.attach(Downgraded).get();
 
   useEffect(() => {
     if (!socket) return;
 
     socket.on('message', (message) => {
-      setMessages([...messages, message]);
+      messages.attach(Downgraded).set([...allMessages, message]);
     });
-  }, [socket, messages]);
+  }, [socket, allMessages, messages]);
 
   return (
     <div className='h-full overflow-y-scroll'>
-      {messages.map((message, idx) => (
+      {messages.get().map((message, idx) => (
         <ChatMessage key={idx} message={message} />
       ))}
       <div className='h-20' />
