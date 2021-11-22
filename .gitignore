@@ -1,3 +1,6 @@
+# workspace
 .vscode
 .idea
-old
+
+# redis
+*.rdb
