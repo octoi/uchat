@@ -83,6 +83,23 @@ export const findUser = (email: string) => {
   });
 };
 
+export const findUserById = (userId: number) => {
+  return new Promise((resolve, reject) => {
+    prismaClient.user
+      .findUnique({ where: { id: userId } })
+      .then((user) => {
+        if (!user) {
+          reject(`Failed to find user with email ${userId}`);
+          return;
+        }
+        resolve(user);
+      })
+      .catch(() => {
+        reject(`Failed to find user with email ${userId}`);
+      });
+  });
+};
+
 export const joinRoom = (roomId: string, userId: number) => {
   return new Promise(async (resolve, reject) => {
     const room: any = await getRoom(roomId);
