@@ -16,3 +16,10 @@ export const getAndDeleteDataController = async (
   await deleteData(socketId).catch(log.error);
   return data;
 };
+
+export const getDataController = async (
+  socketId: string
+): Promise<{ socketId: string; roomId: string; userId: number }> => {
+  const data: any = await getData(socketId).catch(log.error);
+  return data;
+};

@@ -3,6 +3,7 @@ import { generateToken } from '../utils/jwt';
 import { loginArgs, registerArgs, updateArgs } from '../utils/types';
 import {
   findUser,
+  findUserById,
   getJoinedRooms,
   loginUser,
   registerUser,
@@ -44,6 +45,14 @@ export const updateController = async (args: updateArgs) => {
 
 export const getUserController = async (email: string) => {
   const user: any = await findUser(email).catch((err) => {
+    throw new UserInputError(err);
+  });
+
+  return user;
+};
+
+export const getUserByIdController = async (userId: number) => {
+  const user: any = await findUserById(userId).catch((err) => {
     throw new UserInputError(err);
   });
 

@@ -5,33 +5,41 @@ import { AppSocket, ClearChat, JoinRoom, Message } from './types';
 import { botMessage } from './utils';
 import {
   getAndDeleteDataController,
+  getDataController,
   saveUserDataController,
 } from '../controllers/redis.controller';
+import { getUserByIdController } from '../controllers/user.controller';
 
 export const joinRoom = (socket: AppSocket, data: JoinRoom) => {
   saveUserDataController(socket.id, data.roomId, data.sender.userId);
 
-  socket.join(data.roomId);
-
-  socket.broadcast.emit(
-    'message',
-    botMessage(`${data.sender.name} has joined the gang`)
-  );
   socket.emit(
     'message',
     botMessage(`Welcome ${data.sender.name} to ${data.roomId}`)
   );
+
+  socket.broadcast
+    .to(data.roomId)
+    .emit('message', botMessage(`${data.sender.name} has joined the gang`));
+
+  socket.join(data.roomId);
 };
 
-export const message = (socket: AppSocket, data: Message) => {
-  socket.broadcast.emit('message', data);
+export const message = async (socket: AppSocket, data: Message) => {
   socket.emit('message', data);
+  const { roomId } = await getDataController(socket.id);
+  socket.broadcast.to(roomId).emit('message', data);
 };
 
 export const leaveRoom = (socket: AppSocket) => {
   log.error(`${socket.id} disconnected`);
   getAndDeleteDataController(socket.id).then(({ roomId, userId }) => {
     leaveRoomController(roomId, userId);
+    getUserByIdController(userId).then((userData) => {
+      socket.broadcast
+        .to(roomId)
+        .emit('message', botMessage(`${userData.name} has left the chat`));
+    });
   });
 };
 
