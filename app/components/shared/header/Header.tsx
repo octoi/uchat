@@ -22,7 +22,7 @@ export default function Header() {
             {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img src='/logo.svg' alt='Uchat' className='w-10 cursor-pointer' />
           </Link>
-          <Link href={Paths.explore} passHref>
+          <Link href={Paths.app} passHref>
             <p className={styles.link}>Explore</p>
           </Link>
           <Link href={Paths.terms} passHref>

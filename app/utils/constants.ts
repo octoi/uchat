@@ -6,7 +6,6 @@ export enum Paths {
   login = '/account/login',
   app = '/',
   settings = '/account/settings',
-  explore = '/app/explore',
   terms = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   newRoom = '/room/new',
   room = `/room`,
