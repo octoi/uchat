@@ -94,7 +94,7 @@ export default function LoggedAuthButton({
           <ImEnter className='mr-3' />
           Join Room
         </Button>
-        <Link href={Paths.explore} passHref>
+        <Link href={Paths.app} passHref>
           <Button
             size='lg'
             width='100%'
