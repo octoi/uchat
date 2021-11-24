@@ -69,6 +69,9 @@ export default function RoomSettings({
           justifyContent='flex-start'
           alignItems='center'
           onClick={() => {
+            const permission = window.confirm('Are you sure ?');
+            if (!permission) return;
+
             leaveRoom({ variables: { roomId } })
               .then(() => {
                 router.push(Paths.app);
@@ -101,7 +104,12 @@ export default function RoomSettings({
               flexDirection='row'
               justifyContent='flex-start'
               alignItems='center'
-              onClick={() => clearChatForAll(roomId)}
+              onClick={() => {
+                const permission = window.confirm('Are you sure ?');
+                if (!permission) return;
+
+                clearChatForAll(roomId);
+              }}
             >
               <AiOutlineClear className='mr-2' size='21' />
               Clear For All
@@ -118,6 +126,9 @@ export default function RoomSettings({
               justifyContent='flex-start'
               alignItems='center'
               onClick={() => {
+                const permission = window.confirm('Are you sure ?');
+                if (!permission) return;
+
                 deleteRoom({ variables: { roomId } })
                   .then(() => {
                     emitDeleteRoom();

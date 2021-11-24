@@ -134,7 +134,7 @@ export const leaveRoom = (roomId: string, userId: number) => {
           },
         },
       })
-      .then(() => resolve(`Left from '${room.title}' successfully`))
+      .then(() => resolve(`Left from '${room?.title}' successfully`))
       .catch((err) => {
         console.log(err);
         reject(`Failed to leave room ${roomId}`);
