@@ -4,7 +4,7 @@ export const SOCKET_SERVER = 'http://localhost:5000';
 export enum Paths {
   register = '/account/register',
   login = '/account/login',
-  app = '/app',
+  app = '/',
   settings = '/account/settings',
   explore = '/app/explore',
   terms = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
