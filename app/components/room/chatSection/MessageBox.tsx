@@ -1,4 +1,3 @@
-import { IoMdAddCircleOutline } from 'react-icons/io';
 import { AiOutlineSend } from 'react-icons/ai';
 import { Downgraded, useState } from '@hookstate/core';
 import { socketStore } from '@/state/socket.state';
@@ -29,9 +28,6 @@ export default function MessageBox({ roomId }: { roomId: string }) {
 
   return (
     <div className='absolute bottom-0 w-full bg-app-dark p-4 rounded flex items-center'>
-      <div className='hover:opacity-70 cursor-pointer transition duration-300'>
-        <IoMdAddCircleOutline size={30} />
-      </div>
       <textarea
         placeholder={`Message ${roomId}`}
         className='border-none outline-none bg-app-dark ml-2 text-app-grey w-full h-7 text-lg resize-none'
