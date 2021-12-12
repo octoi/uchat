@@ -2,6 +2,42 @@
 
 move to `/api` which contains all server code, which includes a Graphql API and a Socket IO server for real time connection.
 
+```bash
+$ cd api
+```
+
+## Docker setup
+
+You need `docker`, `docker-compose`, & `npm` installed on your system in order to do this.
+
+1. Install dependencies and build files
+
+   ```bash
+   $ npm install
+   $ npm run build
+   
+   # Or using yarn
+   
+   $ yarn install
+   $ yarn build
+   ```
+
+2. Create docker container
+
+   ```bash
+   $ docker build -t uchat .
+   ```
+
+3. Docker compose
+
+   ```bash
+   $ docker-compose up
+   ```
+
+Now you will have a graphql server on http://localhost:5000
+
+## Manual Setup
+
 **<u>SETUP ENVIRONMENT</u>**
 
 create a file named `.env` in root of `/api`
