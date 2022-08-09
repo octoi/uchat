@@ -1,8 +1,0 @@
-.roomPictureContainer {
-  position: absolute;
-  left: 1.25rem;
-  bottom: -25px;
-  padding: 2px;
-
-  @apply border-app-darker bg-app-darker border-8 rounded-3xl;
-}
